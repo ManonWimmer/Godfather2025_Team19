@@ -77,7 +77,6 @@ public class PoolManager : MonoBehaviour
         }
 
         GameObject nonActiveChild = GetFirstNonActiveGameObject(children);
-        Debug.Log(nonActiveChild);
 
         // Create new child if full list
         if (nonActiveChild == null)

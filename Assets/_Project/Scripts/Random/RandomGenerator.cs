@@ -57,7 +57,7 @@ public class RandomGenerator : MonoBehaviour
         foreach(Transform randomTransform in _randomTransforms)
         {
             float random = Random.Range(0f, 1f);
-            Debug.Log(random);
+            //Debug.Log(random);
             
             if (random <= _wallFinalMaxProba && canSpawnWall)
             {
