@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class vanManager : MonoBehaviour
 {
 
     public BoxCollider2D boxCollider;
     [SerializeField] private float points = 0;
-
+    [SerializeField] private GameObject _UIPoints;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class vanManager : MonoBehaviour
     }
     private void Update()
     {
+        _UIPoints.GetComponent<Text>().text = points.ToString();
         if (points < 0)
         {
             points = 0;
