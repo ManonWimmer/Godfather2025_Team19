@@ -19,10 +19,6 @@ public class RandomGenerator : MonoBehaviour
     private float _wallFinalMaxProba = 0f;
     private float _collectibleFinalMaxProba = 0f;
 
-    [Header("Prefabs")]
-    [SerializeField] private GameObject _wallPrefab;
-    [SerializeField] private GameObject _collectiblePrefab;
-
     [Header("Speed & Time")]
     [SerializeField] private float _speedMultiplier = 1.05f;
     [SerializeField] private float _startSpeed = 5f;
@@ -66,13 +62,13 @@ public class RandomGenerator : MonoBehaviour
             if (random <= _wallFinalMaxProba && canSpawnWall)
             {
                 // Spawn wall
-                GameObject newWall = Instantiate(_wallPrefab, randomTransform);
+                PoolManager.Instance.SpawnObject(SpawnObjectType.Wall, randomTransform.position);
                 canSpawnWall = false;
             }
             else if (random > _wallFinalMaxProba && random <= _collectibleFinalMaxProba && canSpawnCollectible)
             {
                 // Spawn collectible
-                GameObject newCollectible = Instantiate(_collectiblePrefab, randomTransform);
+                PoolManager.Instance.SpawnObject(SpawnObjectType.Collectible, randomTransform.position);
                 canSpawnCollectible = false;
             }
         }
@@ -82,7 +78,6 @@ public class RandomGenerator : MonoBehaviour
     private void Update()
     {
         _currentSpeed = _currentSpeed + _speedMultiplier * Time.deltaTime;
-        //_timeBetweenSpawns = _timeBetweenSpawns - _speedMultiplier * Time.deltaTime;
 
         _lastSpawnedTime += Time.deltaTime;
         if (_lastSpawnedTime > _timeBetweenSpawns)
@@ -90,6 +85,5 @@ public class RandomGenerator : MonoBehaviour
             SetNewRandoms();
             _lastSpawnedTime = 0f;
         }
-        // each x time * speed -> set new randoms
     }
 }
