@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomGenerator : MonoBehaviour
@@ -12,17 +13,23 @@ public class RandomGenerator : MonoBehaviour
     [SerializeField] private List<Transform> _randomTransforms = new List<Transform>();
 
     [Header("Probabilities")]
-    [SerializeField] private float _wallSpawnProbability = 0.2f;
-    [SerializeField] private float _collectibleSpawnProbability = 0.4f;
+    [SerializeField][UnityEngine.Range(0, 1)] private float _wallSpawnProbability = 0.2f;
+    [SerializeField][UnityEngine.Range(0, 1)] private float _collectibleSpawnProbability = 0.4f;
+
+    private float _wallFinalMaxProba = 0f;
+    private float _collectibleFinalMaxProba = 0f;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _wallPrefab;
     [SerializeField] private GameObject _collectiblePrefab;
 
-    [Header("Speed")]
+    [Header("Speed & Time")]
     [SerializeField] private float _speedMultiplier = 1.05f;
     [SerializeField] private float _startSpeed = 5f;
+    [SerializeField] private float _timeBetweenSpawns = 1f;
     private float _currentSpeed = 5f;
+
+    private float _lastSpawnedTime = 0f;
 
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
 
@@ -36,21 +43,53 @@ public class RandomGenerator : MonoBehaviour
     private void Start()
     {
         _currentSpeed = _startSpeed;
+
+        // Final probabilities
+        _wallFinalMaxProba = _wallSpawnProbability;
+        _collectibleFinalMaxProba = _wallFinalMaxProba + _collectibleSpawnProbability;
+
+        // Test randoms
+        SetNewRandoms();
     }
 
     public void SetNewRandoms()
     {
-        // for each random transform
-        // get random
-        // check if random wall -> spawn wall
-        // check if random collectible -> spawn collectible
+        bool canSpawnWall = true;
+        bool canSpawnCollectible = true;
+
+        // Can only spawn 1 wall max & 1 collectible max
+        foreach(Transform randomTransform in _randomTransforms)
+        {
+            float random = Random.Range(0f, 1f);
+            Debug.Log(random);
+            
+            if (random <= _wallFinalMaxProba && canSpawnWall)
+            {
+                // Spawn wall
+                GameObject newWall = Instantiate(_wallPrefab, randomTransform);
+                canSpawnWall = false;
+            }
+            else if (random > _wallFinalMaxProba && random <= _collectibleFinalMaxProba && canSpawnCollectible)
+            {
+                // Spawn collectible
+                GameObject newCollectible = Instantiate(_collectiblePrefab, randomTransform);
+                canSpawnCollectible = false;
+            }
+        }
     }
 
 
     private void Update()
     {
         _currentSpeed = _currentSpeed + _speedMultiplier * Time.deltaTime;
+        //_timeBetweenSpawns = _timeBetweenSpawns - _speedMultiplier * Time.deltaTime;
 
+        _lastSpawnedTime += Time.deltaTime;
+        if (_lastSpawnedTime > _timeBetweenSpawns)
+        {
+            SetNewRandoms();
+            _lastSpawnedTime = 0f;
+        }
         // each x time * speed -> set new randoms
     }
 }
