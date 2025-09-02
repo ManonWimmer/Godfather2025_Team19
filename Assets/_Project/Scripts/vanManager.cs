@@ -5,10 +5,14 @@ public class vanManager : MonoBehaviour
 {
 
     public BoxCollider2D boxCollider;
+    [SerializeField] private float points = 0;
+
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        Debug.Log("Points: " + points);
+        Debug.Log("Points: " + points);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -20,15 +24,55 @@ public class vanManager : MonoBehaviour
         }
 
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-
-        if (collision.gameObject.CompareTag("Collectible"))
+        if (points < 0)
         {
-            Debug.Log("Player collected something.");
+            points = 0;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "+5":
+                points += 5;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            case "+10":
+                points += 10;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            case "-5":
+                points -= 5;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            case "-10":
+                points -= 10;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            case "x2":
+                points *= 2;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            case "/2":
+                points *= 0.5f;
+                Debug.Log("Points: " + points);
+                Destroy(collision.gameObject);
+                break;
+            default:
+                Debug.Log("Player collected something.");
+                break;
+        }
+
+    }
+
+    
 
 
 
