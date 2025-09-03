@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class VanManager : MonoBehaviour
@@ -31,23 +32,23 @@ public class VanManager : MonoBehaviour
         Debug.Log("Points: " + points);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Debug.Log("Player collided with a wall.");
-            jauge++;
-            crashCount++;
-            if (crashCount == 5)
-            {
-                Debug.Log("Game Over.");
-                crashed = true;
-                SceneManager.LoadScene("EndScreens");
-            }
-            
-        }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        Debug.Log("Player collided with a wall.");
+    //        jauge++;
+    //        crashCount++;
+    //        if (crashCount == 5)
+    //        {
+    //            Debug.Log("Game Over.");
+    //            crashed = true;
+    //            SceneManager.LoadScene("EndScreens");
+    //        }
+           
+    //    }
 
-    }
+    //}
     private void Update()
     {
         _UIPoints.text = points.ToString();
@@ -69,6 +70,17 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 Debug.Log("Points: " + points);
                 Destroy(collision.gameObject);
+                break;
+            case "wall":
+                Debug.Log("Player collided with a wall.");
+                jauge++;
+                crashCount++;
+                if (crashCount == 5)
+                {
+                    Debug.Log("Game Over.");
+                    crashed = true;
+                    SceneManager.LoadScene("EndScreens");
+                }
                 break;
             case "+10":
                 points += bonus2 * jauge;
@@ -93,6 +105,7 @@ public class VanManager : MonoBehaviour
                 StartCoroutine(ScreenRotate());
                 Destroy(collision.gameObject);
                 break;
+
             default:
                 Debug.Log("Player collected something.");
                 break;

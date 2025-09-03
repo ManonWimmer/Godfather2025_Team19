@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3412764006556929295}
   m_Layer: 0
   m_Name: Temp_Collectible
-  m_TagString: Collectible
+  m_TagString: +10
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
