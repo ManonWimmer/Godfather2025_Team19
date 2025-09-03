@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 1288023180}
   m_Layer: 0
   m_Name: Collectible 2
-  m_TagString: huile
+  m_TagString: Oil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,6 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
   _UIPoints: {fileID: 693101034}
+  _camera: {fileID: 971113834}
 --- !u!1 &1806071012
 GameObject:
   m_ObjectHideFlags: 0

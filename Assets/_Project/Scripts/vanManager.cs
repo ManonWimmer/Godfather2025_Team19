@@ -70,7 +70,7 @@ public class VanManager : MonoBehaviour
                 Debug.Log("Points: " + points);
                 Destroy(collision.gameObject);
                 break;
-            case "huile":
+            case "Oil":
                 Debug.Log("Player hit oil.");
                 StartCoroutine(ScreenRotate());
                 Destroy(collision.gameObject);
