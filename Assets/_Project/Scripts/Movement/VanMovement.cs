@@ -9,13 +9,13 @@ public class RoadMovement : MonoBehaviour
     float moveInput_X;
     float moveInput_Y;
 
-    void Update()
+    void FixedUpdate()
     {
         moveInput_X = Input.GetAxis("Horizontal");
         moveInput_Y = Input.GetAxis("Vertical");
 
         Vector3 newPosition = transform.position;
-        newPosition.x -= moveInput_X * speed * Time.deltaTime;
+        newPosition.x += moveInput_X * speed * Time.deltaTime;
         newPosition.y -= moveInput_Y * speed_Y * Time.deltaTime;
 
         newPosition.x = Mathf.Clamp(newPosition.x, -limite_X, limite_X);
