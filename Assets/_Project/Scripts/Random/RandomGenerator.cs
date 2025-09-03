@@ -91,7 +91,11 @@ public class RandomGenerator : MonoBehaviour
             SetNewRandoms();
             _lastSpawnedTime = 0f;
 
-            if (_currentNbrGenerations > _nbrMaxGenerations) _canGenerate = false;
+            if (_currentNbrGenerations > _nbrMaxGenerations)
+            {
+                _canGenerate = false;
+                GameManager.Instance.StartVictory();
+            }
         }
     }
 }
