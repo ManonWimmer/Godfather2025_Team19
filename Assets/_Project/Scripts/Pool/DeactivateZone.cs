@@ -6,7 +6,7 @@ public class DeactivateZone : MonoBehaviour
     {
         Debug.Log(collision.gameObject);
 
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Collectible"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Collectible") || collision.gameObject.CompareTag("Road"))
         {
             //Debug.Log("deactivate");
             collision.gameObject.SetActive(false);
