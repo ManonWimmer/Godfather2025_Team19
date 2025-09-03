@@ -27,6 +27,9 @@ public class RandomGenerator : MonoBehaviour
     [SerializeField] private float _timeBetweenSpawns = 1f;
     private float _currentSpeed = 5f;
 
+    [Header("Roads")]
+    [SerializeField] private int _road2Generations = 4;
+
     private float _lastSpawnedTime = 0f;
 
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
@@ -95,6 +98,10 @@ public class RandomGenerator : MonoBehaviour
             {
                 _canGenerate = false;
                 GameManager.Instance.StartVictory();
+            }
+            else if (_currentNbrGenerations == _road2Generations)
+            {
+                RoadGenerator.Instance.SetNewRoadType(SpawnObjectType.Road2);
             }
         }
     }

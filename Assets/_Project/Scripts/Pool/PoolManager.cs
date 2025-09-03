@@ -7,7 +7,8 @@ public enum SpawnObjectType
 {
     Wall,
     Collectible, 
-    Road
+    Road,
+    Road2
 }
 
 public class PoolManager : MonoBehaviour
@@ -27,9 +28,14 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject _roadPrefab;
     [SerializeField] private Transform _roadParent;
 
+    [Header("Road2")]
+    [SerializeField] private GameObject _road2Prefab;
+    [SerializeField] private Transform _road2Parent;
+
     private List<GameObject> _wallChildren = new List<GameObject>();
     private List<GameObject> _collectibleChildren = new List<GameObject>();
     private List<GameObject> _roadChildren = new List<GameObject>();
+    private List<GameObject> _road2Children = new List<GameObject>();
     // ----- FIELDS ----- //
 
     private void Awake()
@@ -48,6 +54,7 @@ public class PoolManager : MonoBehaviour
         _wallChildren = GetChildren(_wallParent);
         _collectibleChildren = GetChildren(_collectibleParent);
         _roadChildren = GetChildren(_roadParent);
+        _road2Children = GetChildren(_road2Parent);
     }
 
     private List<GameObject> GetChildren(Transform parent)
@@ -64,6 +71,7 @@ public class PoolManager : MonoBehaviour
 
     public GameObject SpawnObject(SpawnObjectType spawnType, Vector3 spawnPosition)
     {
+        //Debug.Log(spawnType);
         List<GameObject> children = new List<GameObject>();
         Transform parent = null;
         GameObject prefab = null;
@@ -85,6 +93,11 @@ public class PoolManager : MonoBehaviour
                 children = _roadChildren;
                 parent = _roadParent;
                 prefab = _roadPrefab;
+                break;
+            case SpawnObjectType.Road2:
+                children = _road2Children;
+                parent = _road2Parent;
+                prefab = _road2Prefab;
                 break;
         }
 
