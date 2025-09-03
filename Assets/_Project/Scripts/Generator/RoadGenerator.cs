@@ -23,7 +23,7 @@ public class RoadGenerator : MonoBehaviour
     {
         if (_lastSpawnedRoadTransform.position.y <= _roadSpawn.position.y - _roadHeight)
         {
-            GameObject newRoad = Instantiate(_roadPrefab, _roadSpawn);
+            GameObject newRoad = PoolManager.Instance.SpawnObject(SpawnObjectType.Road, _roadSpawn.position);
             _lastSpawnedRoadTransform = newRoad.transform;
         }
     }

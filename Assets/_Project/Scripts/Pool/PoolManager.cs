@@ -6,7 +6,8 @@ using UnityEngine;
 public enum SpawnObjectType
 {
     Wall,
-    Collectible
+    Collectible, 
+    Road
 }
 
 public class PoolManager : MonoBehaviour
@@ -22,8 +23,13 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject _collectiblePrefab;
     [SerializeField] private Transform _collectibleParent;
 
+    [Header("Road")]
+    [SerializeField] private GameObject _roadPrefab;
+    [SerializeField] private Transform _roadParent;
+
     private List<GameObject> _wallChildren = new List<GameObject>();
     private List<GameObject> _collectibleChildren = new List<GameObject>();
+    private List<GameObject> _roadChildren = new List<GameObject>();
     // ----- FIELDS ----- //
 
     private void Awake()
@@ -41,6 +47,7 @@ public class PoolManager : MonoBehaviour
         // Get children 
         _wallChildren = GetChildren(_wallParent);
         _collectibleChildren = GetChildren(_collectibleParent);
+        _roadChildren = GetChildren(_roadParent);
     }
 
     private List<GameObject> GetChildren(Transform parent)
@@ -55,7 +62,7 @@ public class PoolManager : MonoBehaviour
         return result;
     }
 
-    public void SpawnObject(SpawnObjectType spawnType, Vector3 spawnPosition)
+    public GameObject SpawnObject(SpawnObjectType spawnType, Vector3 spawnPosition)
     {
         List<GameObject> children = new List<GameObject>();
         Transform parent = null;
@@ -74,6 +81,11 @@ public class PoolManager : MonoBehaviour
                 parent = _collectibleParent;
                 prefab = _collectiblePrefab;
                 break;
+            case SpawnObjectType.Road:
+                children = _roadChildren;
+                parent = _roadParent;
+                prefab = _roadPrefab;
+                break;
         }
 
         GameObject nonActiveChild = GetFirstNonActiveGameObject(children);
@@ -88,6 +100,7 @@ public class PoolManager : MonoBehaviour
         nonActiveChild.SetActive(true);
         nonActiveChild.transform.position = spawnPosition;
 
+        return nonActiveChild;
     }
 
     private GameObject GetFirstNonActiveGameObject(List<GameObject> children)
