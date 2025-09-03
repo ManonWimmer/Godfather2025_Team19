@@ -1,14 +1,15 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class VanManager : MonoBehaviour
 {
-    public static float  points = 0;
+    public static float points = 0;
     public static bool crashed = false;
     public BoxCollider2D boxCollider;
     [SerializeField] private TextMeshProUGUI _UIPoints;
+    [SerializeField] private GameObject _camera;
 
     void Start()
     {
@@ -69,6 +70,11 @@ public class VanManager : MonoBehaviour
                 Debug.Log("Points: " + points);
                 Destroy(collision.gameObject);
                 break;
+            case "huile":
+                Debug.Log("Player hit oil.");
+                StartCoroutine(ScreenRotate());
+                Destroy(collision.gameObject);
+                break;
             default:
                 Debug.Log("Player collected something.");
                 break;
@@ -76,8 +82,14 @@ public class VanManager : MonoBehaviour
 
     }
 
-    
 
+    IEnumerator ScreenRotate()
+    {
+        _camera.transform.Rotate(0, 0, 180);
 
+        yield return new WaitForSeconds(3);
 
+        _camera.transform.Rotate(0, 0, -180);
+        yield return null;
+    }
 }
