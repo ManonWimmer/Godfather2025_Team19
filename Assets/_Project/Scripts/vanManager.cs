@@ -69,7 +69,7 @@ public class VanManager : MonoBehaviour
                 points += bonus1 * jauge;
                 jauge++;
                 Debug.Log("Points: " + points);
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 break;
             case "wall":
                 Debug.Log("Player collided with a wall.");
@@ -86,24 +86,24 @@ public class VanManager : MonoBehaviour
                 points += bonus2 * jauge;
                 jauge++;
                 Debug.Log("Points: " + points);
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 break;
             case "-5":
                 points -= malus1;
                 Debug.Log("Points: " + points);
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 break;
             case "-10":
                 points -= malus2;
                 Debug.Log("Points: " + points);
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 break;
 
             case "Oil":
                 Debug.Log("Player hit oil.");
                 jauge++;
                 StartCoroutine(ScreenRotate());
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
                 break;
 
             default:
