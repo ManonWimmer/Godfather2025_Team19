@@ -974,9 +974,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b1527c8011a444db7e85b36d5d98f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashCount: 0
   boxCollider: {fileID: 0}
   _UIPoints: {fileID: 693101034}
   _camera: {fileID: 971113834}
+  bonus1: 5
+  bonus2: 10
+  malus1: 5
+  malus2: 10
+  jauge: 1
 --- !u!1 &1806071012
 GameObject:
   m_ObjectHideFlags: 0
