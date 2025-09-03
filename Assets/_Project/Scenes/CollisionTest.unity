@@ -975,8 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
-  points: 0
-  _UIPoints: {fileID: 693101032}
+  _UIPoints: {fileID: 693101034}
 --- !u!1 &1806071012
 GameObject:
   m_ObjectHideFlags: 0
