@@ -10,6 +10,8 @@ public class RandomGenerator : MonoBehaviour
 
     [Header("Values")]
     [SerializeField] private int _nbrMaxGenerations = 10;
+    private int _currentNbrGenerations = 0;
+    private bool _canGenerate = true;
     [SerializeField] private List<Transform> _randomTransforms = new List<Transform>();
 
     [Header("Probabilities")]
@@ -72,11 +74,15 @@ public class RandomGenerator : MonoBehaviour
                 canSpawnCollectible = false;
             }
         }
+
+        _currentNbrGenerations++;
     }
 
 
     private void Update()
     {
+        if (!_canGenerate) return;
+
         _currentSpeed = _currentSpeed + _speedMultiplier * Time.deltaTime;
 
         _lastSpawnedTime += Time.deltaTime;
@@ -84,6 +90,8 @@ public class RandomGenerator : MonoBehaviour
         {
             SetNewRandoms();
             _lastSpawnedTime = 0f;
+
+            if (_currentNbrGenerations > _nbrMaxGenerations) _canGenerate = false;
         }
     }
 }
