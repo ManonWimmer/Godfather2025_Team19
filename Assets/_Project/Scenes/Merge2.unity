@@ -1401,6 +1401,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: Bonus
+      value: 
+      objectReference: {fileID: 8300000, guid: b0dee1173c331fe4784d70178a8ccb69, type: 3}
+    - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: Malus
+      value: 
+      objectReference: {fileID: 8300000, guid: eadd981d89df79949a1e4186348ae700, type: 3}
+    - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1828988098}
@@ -1408,6 +1416,10 @@ PrefabInstance:
       propertyPath: _UIPoints
       value: 
       objectReference: {fileID: 1309051757}
+    - target: {fileID: 578683034957215300, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1772707970831683522, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: m_Name
       value: Van
@@ -1622,6 +1634,10 @@ PrefabInstance:
     - target: {fileID: 6246199909100427639, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
       propertyPath: m_Name
       value: RandomGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _addSpeedPerSecond
+      value: 0.002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
