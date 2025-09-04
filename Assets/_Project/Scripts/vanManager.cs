@@ -71,7 +71,7 @@ public class VanManager : MonoBehaviour
                 Debug.Log("Points: " + points);
                 collision.gameObject.SetActive(false);
                 break;
-            case "wall":
+            case "Wall":
                 Debug.Log("Player collided with a wall.");
                 jauge++;
                 crashCount++;
