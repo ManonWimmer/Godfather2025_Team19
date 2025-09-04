@@ -120,17 +120,17 @@ MonoBehaviour:
   _startSpeed: 5
   _timeBetweenSpawns: 1
   _roadChanges:
-  - RoadType: 3
+  - RoadType: 9
     NbrGenerationsChange: 3
-  - RoadType: 2
+  - RoadType: 10
     NbrGenerationsChange: 6
-  - RoadType: 3
+  - RoadType: 9
     NbrGenerationsChange: 10
-  - RoadType: 2
+  - RoadType: 10
     NbrGenerationsChange: 13
-  - RoadType: 3
+  - RoadType: 9
     NbrGenerationsChange: 15
-  - RoadType: 2
+  - RoadType: 10
     NbrGenerationsChange: 18
 --- !u!1 &6964600906080520212
 GameObject:
