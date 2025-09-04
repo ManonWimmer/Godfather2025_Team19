@@ -12,10 +12,8 @@ public class DeactivateZone : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Road"))
         {
-            Debug.Log("road");
             if (_checkForRoad)
             {
-                Debug.Log("road desav");
                 collision.gameObject.SetActive(false);
             }
         }

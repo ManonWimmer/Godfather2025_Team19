@@ -14,6 +14,11 @@ public class Road : MonoBehaviour
     [SerializeField] private Sprite _startRoad;
     [SerializeField] private Sprite _endRoad;
 
+    [Header("Collisions")]
+    [SerializeField] private GameObject _standardCollisions;
+    [SerializeField] private GameObject _startCollisions;
+    [SerializeField] private GameObject _endCollisions;
+
     private bool _isStartRoad = false;
     private bool _isEndRoad = false;
     // ----- FIELDS ----- //
@@ -56,6 +61,34 @@ public class Road : MonoBehaviour
         _isStartRoad = isStart;
         _isEndRoad = isEnd;
 
+        SetRoadCollisions();
         SetRoadSprite();
+    }
+
+    private void SetRoadCollisions()
+    {
+        if (_standardCollisions == null || _startCollisions == null || _endCollisions == null) return;
+
+        if (_isStartRoad)
+        {
+            // Start collisions
+            _standardCollisions.SetActive(false);
+            _startCollisions.SetActive(true);
+            _endCollisions.SetActive(false);
+        }
+        else if (_isEndRoad)
+        {
+            // End collisions
+            _standardCollisions.SetActive(false);
+            _startCollisions.SetActive(false);
+            _endCollisions.SetActive(true);
+        }
+        else
+        {
+            // Standard collisions
+            _standardCollisions.SetActive(true);
+            _startCollisions.SetActive(false);
+            _endCollisions.SetActive(false);
+        }
     }
 }
