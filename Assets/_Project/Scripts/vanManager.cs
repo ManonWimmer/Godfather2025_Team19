@@ -78,7 +78,7 @@ public class VanManager : MonoBehaviour
         if (_lasTimeAddedScore > 1f)
         {
             points += _addScorePerSecond;
-            //Debug.Log(points);
+            PointsLittlePopUpAnimation();
             _lasTimeAddedScore = 0f;
         }
 
@@ -115,7 +115,7 @@ public class VanManager : MonoBehaviour
         {
             case "+5":
                 points += bonus1 * jauge;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 jauge++;
                 jaugeReset = 0f;
@@ -129,7 +129,7 @@ public class VanManager : MonoBehaviour
                 Debug.Log($"Player collided with a wall - {collision.gameObject.name}");
                 jauge++;
                 points += _addScoreOnWallCollision * jauge;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 jaugeReset = 0f;
                 crashCount++;
@@ -157,7 +157,7 @@ public class VanManager : MonoBehaviour
 
             case "+10":
                 points += bonus2 * jauge;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 jauge++;
                 jaugeReset = 0f;
@@ -169,7 +169,7 @@ public class VanManager : MonoBehaviour
 
             case "-5":
                 points -= malus1;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
 
@@ -178,7 +178,7 @@ public class VanManager : MonoBehaviour
 
             case "-10":
                 points -= malus2;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
 
@@ -207,7 +207,7 @@ public class VanManager : MonoBehaviour
 
             case "x2":
                 points *= 2;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
 
@@ -216,7 +216,7 @@ public class VanManager : MonoBehaviour
 
             case "Kirby":
                 points += _addScoreOnKirbyCollision;
-                PointsPopUpAnimation();
+                PointsBigPopUpAnimation();
 
                 SoundManager.instance.PlaySoundFXClip(Kirby, transform);
 
@@ -230,10 +230,16 @@ public class VanManager : MonoBehaviour
 
     }
 
-    private void PointsPopUpAnimation()
+    private void PointsBigPopUpAnimation()
     {
         _UIPointsGO.transform.DOScale(1.2f, 0.3f).SetEase(Ease.OutBack)
          .OnComplete(() => _UIPointsGO.transform.DOScale(1f, 0.2f));
+    }
+
+    private void PointsLittlePopUpAnimation()
+    {
+        _UIPointsGO.transform.DOScale(.95f, 0.2f).SetEase(Ease.OutBack)
+         .OnComplete(() => _UIPointsGO.transform.DOScale(1f, 0.1f));
     }
 
     private void CollectibleAnimationAndDeactivate(GameObject collectible)
@@ -245,7 +251,6 @@ public class VanManager : MonoBehaviour
         seq.Append(collectible.transform.DOScale(startScale, _collectibleAnimationTime / 2));
         seq.OnComplete(() => collectible.SetActive(false));
     }
-
 
     IEnumerator TakeDamage()
     {
