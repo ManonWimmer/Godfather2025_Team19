@@ -20,6 +20,9 @@ public class VanManager : MonoBehaviour
 
     [SerializeField] private float jauge = 1f;
 
+    [Header("Score")]
+    [SerializeField] private int _addScorePerSecond = -1;
+    private float _lasTimeAddedScore = 0f;
 
     
 // 4 crash donc 5eme GO 
@@ -52,13 +55,19 @@ public class VanManager : MonoBehaviour
     private void Update()
     {
         _UIPoints.text = points.ToString();
-        if (points < 0)
-        {
-            points = 0;
-        }
+
         if (jauge > 3)
         {
             jauge = 3;
+        }
+
+        // Check if add score per second
+        _lasTimeAddedScore += Time.deltaTime;
+        if (_lasTimeAddedScore > 1f)
+        {
+            points += _addScorePerSecond;
+            Debug.Log(points);
+            _lasTimeAddedScore = 0f;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -104,6 +113,10 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 StartCoroutine(ScreenRotate());
                 collision.gameObject.SetActive(false);
+                break;
+
+            case "Hole":
+                SceneManager.LoadScene("EndScreens");
                 break;
 
             default:
