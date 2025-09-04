@@ -27,8 +27,8 @@ public class VanManager : MonoBehaviour
     [SerializeField] private int _addScoreOnKirbyCollision = 20;
     [SerializeField] private int _addScoreOnWallCollision = 30;
 
-    [Header("Jauge")]
-    [SerializeField] private float jauge = 1f;
+    [Header("Combo")]
+    public static float jauge = 1f;
     private float jaugeReset = 0f;
 
     [Header("Score")]
