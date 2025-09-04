@@ -2108,12 +2108,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wallPrefab: {fileID: 3271186326759540176, guid: eee1cb9dc1fc1374aa7a03afdf62e4bd, type: 3}
   _wallParent: {fileID: 1457258112}
-  _collectiblePrefab: {fileID: 8482559607076266534, guid: c8fe6d3003da6cf448e9d47bb9c4a98e, type: 3}
-  _collectibleParent: {fileID: 830837928}
   _roadPrefab: {fileID: 3813881858068858359, guid: e9413c513f88e5f4e8fe28efb041f320, type: 3}
   _roadParent: {fileID: 229131951}
   _road2Prefab: {fileID: 2624204909229571323, guid: fba7e5461ed8ece4ea0f61bd820b820e, type: 3}
   _road2Parent: {fileID: 1748321188}
+  _collectibleProbas: []
+  _plus10Prefab: {fileID: 0}
+  _plus10Parent: {fileID: 0}
+  _plus5Prefab: {fileID: 0}
+  _plus5Parent: {fileID: 0}
+  _minus10Prefab: {fileID: 0}
+  _minus10Parent: {fileID: 0}
+  _minus5Prefab: {fileID: 0}
+  _minus5Parent: {fileID: 0}
+  _multiply2Prefab: {fileID: 0}
+  _multiply2Parent: {fileID: 0}
+  _oilPrefab: {fileID: 0}
+  _oilParent: {fileID: 0}
+  _holePrefab: {fileID: 0}
+  _holeParent: {fileID: 0}
 --- !u!1 &1457258111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,10 +2353,10 @@ MonoBehaviour:
   - {fileID: 796782634}
   _wallSpawnProbability: 0.25
   _collectibleSpawnProbability: 0.166
-  _speedMultiplier: 1.0001
+  _addSpeedPerSecond: 0.01
   _startSpeed: 5
   _timeBetweenSpawns: 1
-  _road2Generations: 4
+  _roadChanges: []
 --- !u!1001 &1680468915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3010,6 +3023,7 @@ MonoBehaviour:
   malus1: 5
   malus2: 10
   jauge: 1
+  _addScorePerSecond: -1
 --- !u!61 &1937089535
 BoxCollider2D:
   m_ObjectHideFlags: 0
