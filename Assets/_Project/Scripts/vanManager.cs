@@ -100,11 +100,12 @@ public class VanManager : MonoBehaviour
         jaugeReset += Time.deltaTime;
         turnCD += Time.deltaTime;
 
+        // Turn camera
         if (turning)
         {
             _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
 
-            if (_camera.transform.rotation.eulerAngles.z >= 180.0f)
+            if (_camera.transform.rotation.eulerAngles.z >= 270.0f)
             {
                 turning = false;
                 turnCD = 0f;
@@ -112,12 +113,13 @@ public class VanManager : MonoBehaviour
         }
         else
         {
-            if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD >= 3)
+            if (_camera.transform.rotation.eulerAngles.z != 90 && turnCD >= 3)
             {
                 _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
-                if (_camera.transform.rotation.eulerAngles.z < 1.0f)
+
+                if (_camera.transform.rotation.eulerAngles.z >= 360.0f || _camera.transform.rotation.eulerAngles.z < 91.0f)
                 {
-                    _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    _camera.transform.rotation = Quaternion.Euler(0, 0, 90);
                 }
             }
         }
@@ -221,13 +223,6 @@ public class VanManager : MonoBehaviour
 
     }
 
-
-    IEnumerator ScreenRotate()
-    {
-        yield return new WaitForSeconds(3);
-        turning = false;
-        yield return null;
-    }
 
     IEnumerator TakeDamage()
     {
