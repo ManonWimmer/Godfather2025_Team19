@@ -7,6 +7,7 @@ public class DeathTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Van"))
         {
+            VanManager.crashed = true;
             SceneManager.LoadScene("EndScreens");
         }
     }
