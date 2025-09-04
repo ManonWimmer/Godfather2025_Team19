@@ -184,7 +184,7 @@ public class PoolManager : MonoBehaviour
         }
 
         nonActiveChild.SetActive(true);
-        nonActiveChild.transform.position = spawnPosition;
+        nonActiveChild.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, nonActiveChild.transform.position.z);
 
         return nonActiveChild;
     }
