@@ -4,10 +4,10 @@ public class RoadMovement : MonoBehaviour
 {
     public float speed = 10f; 
     public float limite_X = 1.5f; 
-    public float speed_Y = 3f;
-    public float limite_Y = 2.75f;
+    //public float speed_Y = 3f;
+    //public float limite_Y = 2.75f;
     float moveInput_X;
-    float moveInput_Y;
+    //float moveInput_Y;
 
     void FixedUpdate()
     {

@@ -16,6 +16,7 @@ TagManager:
   - Road
   - Oil
   - Hole
+  - Kirby
   layers:
   - Default
   - TransparentFX

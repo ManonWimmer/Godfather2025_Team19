@@ -21,6 +21,7 @@ public enum SpawnObjectType
     x2,
     Oil,
     Hole,
+    Kirby,
     Road,
     Road2
 }
@@ -74,6 +75,10 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject _holePrefab;
     [SerializeField] private Transform _holeParent;
 
+    [Header("Kirby")]
+    [SerializeField] private GameObject _kirbyPrefab;
+    [SerializeField] private Transform _kirbyParent;
+
     // Children
     private List<GameObject> _wallChildren = new List<GameObject>();
     private List<GameObject> _roadChildren = new List<GameObject>();
@@ -89,6 +94,8 @@ public class PoolManager : MonoBehaviour
 
     private List<GameObject> _collectibleOilChildren = new List<GameObject>();
     private List<GameObject> _collectibleHoleChildren = new List<GameObject>();
+
+    private List<GameObject> _collectibleKirbyChildren = new List<GameObject>();
     // ----- FIELDS ----- //
 
     private void Awake()
@@ -119,6 +126,8 @@ public class PoolManager : MonoBehaviour
 
         _collectibleOilChildren = GetChildren(_oilParent);
         _collectibleHoleChildren = GetChildren(_holeParent);
+
+        _collectibleHoleChildren = GetChildren(_kirbyParent);
     }
 
     private List<GameObject> GetChildren(Transform parent)
@@ -232,6 +241,11 @@ public class PoolManager : MonoBehaviour
                 children = _collectibleHoleChildren;
                 parent = _holeParent;
                 prefab = _holePrefab;
+                break;
+            case SpawnObjectType.Kirby:
+                children = _collectibleKirbyChildren;
+                parent = _kirbyParent;
+                prefab = _kirbyPrefab;
                 break;
         }
 
