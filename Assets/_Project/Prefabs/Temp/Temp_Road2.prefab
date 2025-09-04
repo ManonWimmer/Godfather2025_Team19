@@ -199,6 +199,14 @@ PrefabInstance:
       value: 10.799999
       objectReference: {fileID: 0}
     - target: {fileID: 3607216456815945274, guid: e9413c513f88e5f4e8fe28efb041f320, type: 3}
+      propertyPath: _endRoad
+      value: 
+      objectReference: {fileID: 21300000, guid: e6a305ddd6cc2664d99c2a29e0b0c4ea, type: 3}
+    - target: {fileID: 3607216456815945274, guid: e9413c513f88e5f4e8fe28efb041f320, type: 3}
+      propertyPath: _startRoad
+      value: 
+      objectReference: {fileID: 21300000, guid: 87676f8b73d474d4db9865bbfc12bdfa, type: 3}
+    - target: {fileID: 3607216456815945274, guid: e9413c513f88e5f4e8fe28efb041f320, type: 3}
       propertyPath: '_randomRoads.Array.data[0]'
       value: 
       objectReference: {fileID: 21300000, guid: 06a94ffe262a01744b30d3d40eb2728f, type: 3}

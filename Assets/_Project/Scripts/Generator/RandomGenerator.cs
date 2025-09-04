@@ -47,6 +47,8 @@ public class RandomGenerator : MonoBehaviour
     private bool _justChangedRoad = false;
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
 
+    public int GetCurrentGeneration() => _currentNbrGenerations;
+    public List<RoadChange> GetRoadChanges() => _roadChanges;
     // ----- FIELDS ----- //
 
     private void Awake()
@@ -111,10 +113,6 @@ public class RandomGenerator : MonoBehaviour
         _lastSpawnedTime += Time.deltaTime;
         if (_lastSpawnedTime > _timeBetweenSpawns)
         {
-            
-
-            
-
             if (_currentNbrGenerations > _nbrMaxGenerations)
             {
                 _canGenerate = false;

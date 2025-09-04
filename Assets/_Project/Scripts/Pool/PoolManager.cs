@@ -144,7 +144,7 @@ public class PoolManager : MonoBehaviour
 
     public GameObject SpawnObject(SpawnObjectType spawnType, Vector3 spawnPosition)
     {
-        Debug.Log($"Spawn type : {spawnType}");
+        //Debug.Log($"Spawn type : {spawnType}");
         List<GameObject> children = new List<GameObject>();
         Transform parent = null;
         GameObject prefab = null;

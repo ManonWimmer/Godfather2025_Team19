@@ -834,6 +834,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 64.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _roadChanges.Array.data[1].NbrGenerationsChange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _roadChanges.Array.data[2].NbrGenerationsChange
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _roadChanges.Array.data[3].NbrGenerationsChange
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _roadChanges.Array.data[4].NbrGenerationsChange
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _roadChanges.Array.data[5].NbrGenerationsChange
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 8534150954348258275, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
       propertyPath: m_LocalPosition.y
       value: 64.1
