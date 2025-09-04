@@ -27,6 +27,7 @@ public class VanManager : MonoBehaviour
 
     [Header("Jauge")]
     [SerializeField] private float jauge = 1f;
+    private float jaugeReset = 0f;
 
     [Header("Score")]
     [SerializeField] private int _addScorePerSecond = -1;
@@ -42,6 +43,7 @@ public class VanManager : MonoBehaviour
         Debug.Log("Points: " + points);
         Debug.Log("Points: " + points);
         crashCount = 0;
+        jaugeReset = 0f;
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -65,6 +67,12 @@ public class VanManager : MonoBehaviour
     {
         _UIPoints.text = points.ToString();
 
+        if (jaugeReset >= 2f)
+        {
+            jauge = 0f;
+            jaugeReset = 0f;
+        }
+
         if (jauge > 3)
         {
             jauge = 3;
@@ -79,6 +87,7 @@ public class VanManager : MonoBehaviour
             _lasTimeAddedScore = 0f;
         }
 
+        jaugeReset += Time.deltaTime;
         turnCD += Time.deltaTime;
 
         if (turning)
@@ -114,12 +123,15 @@ public class VanManager : MonoBehaviour
             case "+5":
                 points += bonus1 * jauge;
                 jauge++;
+                jaugeReset = 0f;
                 Debug.Log("Points: " + points);
                 collision.gameObject.SetActive(false);
                 break;
             case "Wall":
                 Debug.Log("Player collided with a wall.");
                 jauge++;
+                points += 30 * jauge;
+                jaugeReset = 0f;
                 crashCount++;
                 StartCoroutine(TakeDamage());
                 switch (crashCount)
@@ -143,6 +155,7 @@ public class VanManager : MonoBehaviour
             case "+10":
                 points += bonus2 * jauge;
                 jauge++;
+                jaugeReset = 0f;
                 Debug.Log("Points: " + points);
                 collision.gameObject.SetActive(false);
                 break;
@@ -159,7 +172,8 @@ public class VanManager : MonoBehaviour
 
             case "Oil":
                 Debug.Log("Player hit oil.");
-                jauge++;
+
+                jaugeReset = 10f;
                 if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD < 3)
                     turning = false;
                 else turning = true;
@@ -189,17 +203,17 @@ public class VanManager : MonoBehaviour
 
     IEnumerator TakeDamage()
     {
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        _vanSprite.color = new Color(0.6f, 0f, 0f, 0.5f);
         yield return new WaitForSeconds(0.1f);
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        _vanSprite.color = new Color(1f, 1f, 1f, 1f);
         yield return new WaitForSeconds(0.1f);
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        _vanSprite.color = new Color(0.6f, 0f, 0f, 0.5f);
         yield return new WaitForSeconds(0.1f);
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        _vanSprite.color = new Color(1f, 1f, 1f, 1f);
         yield return new WaitForSeconds(0.1f);
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        _vanSprite.color = new Color(0.6f, 0f, 0f, 0.5f);
         yield return new WaitForSeconds(0.1f);
-        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        _vanSprite.color = new Color(1f, 1f, 1f, 1f);
         yield return null;
     }
 }
