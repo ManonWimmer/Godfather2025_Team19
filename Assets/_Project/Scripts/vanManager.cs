@@ -12,6 +12,7 @@ public class VanManager : MonoBehaviour
     public BoxCollider2D boxCollider;
     [SerializeField] private TextMeshProUGUI _UIPoints;
     [SerializeField] private GameObject _camera;
+    [SerializeField] private SpriteRenderer _vanSprite;  
 
     [SerializeField] private float bonus1 = 5f;
     [SerializeField] private float bonus2 = 10f;
@@ -84,6 +85,7 @@ public class VanManager : MonoBehaviour
                 Debug.Log("Player collided with a wall.");
                 jauge++;
                 crashCount++;
+                StartCoroutine(TakeDamage());    
                 if (crashCount == 5)
                 {
                     Debug.Log("Game Over.");
@@ -136,4 +138,20 @@ public class VanManager : MonoBehaviour
         _camera.transform.Rotate(0, 0, -180);
         yield return null;
     }
+
+    IEnumerator TakeDamage()
+    {
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        yield return new WaitForSeconds(0.1f);
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        yield return new WaitForSeconds(0.1f);
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
+        yield return null;
+    }    
 }
