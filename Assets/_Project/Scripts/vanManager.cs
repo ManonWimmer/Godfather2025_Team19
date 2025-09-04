@@ -33,6 +33,10 @@ public class VanManager : MonoBehaviour
     [SerializeField] private int _addScorePerSecond = -1;
     private float _lasTimeAddedScore = 0f;
 
+    [Header("SoundsFX")]
+    [SerializeField] AudioClip Bonus;
+    [SerializeField] AudioClip Malus;
+
 
     // 4 crash donc 5eme GO 
     // jauge mutiply *1 *2* *3
@@ -125,6 +129,7 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 jaugeReset = 0f;
                 Debug.Log("Points: " + points);
+                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "Wall":
@@ -157,16 +162,19 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 jaugeReset = 0f;
                 Debug.Log("Points: " + points);
+                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "-5":
                 points -= malus1;
                 Debug.Log("Points: " + points);
+                SoundManager.instance.PlaySoundFXClip(Malus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "-10":
                 points -= malus2;
                 Debug.Log("Points: " + points);
+                SoundManager.instance.PlaySoundFXClip(Malus, transform);
                 collision.gameObject.SetActive(false);
                 break;
 
@@ -184,6 +192,12 @@ public class VanManager : MonoBehaviour
             case "Hole":
                 crashed = true;
                 SceneManager.LoadScene("EndScreens");
+                break;
+
+            case "x2":
+                points *= 2;
+                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
+                collision.gameObject.SetActive(false);
                 break;
 
             default:
