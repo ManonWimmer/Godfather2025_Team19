@@ -202,7 +202,7 @@ public class PoolManager : MonoBehaviour
     private void GetRandomCollectibleChildrenParentAndPrefab(out List<GameObject> children, out Transform parent, out GameObject prefab)
     {
         CollectibleProbability randomCollectible = GetRandomCollectible(_collectibleProbas);
-        Debug.Log($"Random collectible : {randomCollectible.SpawnType}");
+        //Debug.Log($"Random collectible : {randomCollectible.SpawnType}");
 
         switch (randomCollectible.SpawnType)
         { 
@@ -249,7 +249,7 @@ public class PoolManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Collectible parent : {parent}");
+        //ebug.Log($"Collectible parent : {parent}");
     }
 
     public CollectibleProbability GetRandomCollectible(List<CollectibleProbability> liste)

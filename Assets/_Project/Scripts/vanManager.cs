@@ -50,8 +50,7 @@ public class VanManager : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        Debug.Log("Points: " + points);
-        Debug.Log("Points: " + points);
+        //Debug.Log("Points: " + points);
         crashCount = 0;
         jaugeReset = 0f;
     }
@@ -93,7 +92,7 @@ public class VanManager : MonoBehaviour
         if (_lasTimeAddedScore > 1f)
         {
             points += _addScorePerSecond;
-            Debug.Log(points);
+            //Debug.Log(points);
             _lasTimeAddedScore = 0f;
         }
 
@@ -136,12 +135,12 @@ public class VanManager : MonoBehaviour
                 points += bonus1 * jauge;
                 jauge++;
                 jaugeReset = 0f;
-                Debug.Log("Points: " + points);
+                //Debug.Log("Points: " + points);
                 SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "Wall":
-                Debug.Log("Player collided with a wall.");
+                Debug.Log($"Player collided with a wall - {collision.gameObject.name}");
                 jauge++;
                 points += _addScoreOnWallCollision * jauge;
                 jaugeReset = 0f;
@@ -169,19 +168,19 @@ public class VanManager : MonoBehaviour
                 points += bonus2 * jauge;
                 jauge++;
                 jaugeReset = 0f;
-                Debug.Log("Points: " + points);
+                //Debug.Log("Points: " + points);
                 SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "-5":
                 points -= malus1;
-                Debug.Log("Points: " + points);
+                //Debug.Log("Points: " + points);
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "-10":
                 points -= malus2;
-                Debug.Log("Points: " + points);
+                //Debug.Log("Points: " + points);
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
                 collision.gameObject.SetActive(false);
                 break;

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2994198627584254276}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 64.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3000101178336776529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 8, z: 0}
+  m_LocalPosition: {x: 7, y: 64.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98de0dcd32f76e54c8be5dbd9d4771aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nbrMaxGenerations: 30
+  _nbrMaxGenerations: 100
   _randomTransforms:
   - {fileID: 5805320832027664784}
   - {fileID: 7349433835552305580}
@@ -123,15 +123,15 @@ MonoBehaviour:
   - RoadType: 11
     NbrGenerationsChange: 3
   - RoadType: 10
-    NbrGenerationsChange: 7
+    NbrGenerationsChange: 8
   - RoadType: 11
-    NbrGenerationsChange: 10
+    NbrGenerationsChange: 12
   - RoadType: 10
-    NbrGenerationsChange: 14
+    NbrGenerationsChange: 17
   - RoadType: 11
-    NbrGenerationsChange: 18
-  - RoadType: 10
     NbrGenerationsChange: 22
+  - RoadType: 10
+    NbrGenerationsChange: 24
 --- !u!1 &6964600906080520212
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 6964600906080520212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 8, z: 0}
+  m_LocalPosition: {x: -7, y: 64.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
