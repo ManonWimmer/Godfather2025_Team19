@@ -1,7 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class VanManager : MonoBehaviour
@@ -12,28 +12,36 @@ public class VanManager : MonoBehaviour
     public BoxCollider2D boxCollider;
     [SerializeField] private TextMeshProUGUI _UIPoints;
     [SerializeField] private GameObject _camera;
-    [SerializeField] private SpriteRenderer _vanSprite;  
+    [SerializeField] private SpriteRenderer _vanSprite;
 
-    [SerializeField] private float bonus1 = 5f;
-    [SerializeField] private float bonus2 = 10f;
-    [SerializeField] private float malus1 = 5f;
-    [SerializeField] private float malus2 = 10f;
+    [Header("Sprite Van")]
+    [SerializeField] private List<Sprite> etats = new List<Sprite>();
 
+    [Header("Collectibles")]
+    private float bonus1 = 5f;
+    private float bonus2 = 10f;
+    private float malus1 = 5f;
+    private float malus2 = 10f;
+    private bool turning = false;
+    private float turnCD = 0f;
+
+    [Header("Jauge")]
     [SerializeField] private float jauge = 1f;
 
     [Header("Score")]
     [SerializeField] private int _addScorePerSecond = -1;
     private float _lasTimeAddedScore = 0f;
 
-    
-// 4 crash donc 5eme GO 
-// jauge mutiply *1 *2* *3
+
+    // 4 crash donc 5eme GO 
+    // jauge mutiply *1 *2* *3
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         Debug.Log("Points: " + points);
         Debug.Log("Points: " + points);
+        crashCount = 0;
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -49,7 +57,7 @@ public class VanManager : MonoBehaviour
     //            crashed = true;
     //            SceneManager.LoadScene("EndScreens");
     //        }
-           
+
     //    }
 
     //}
@@ -70,6 +78,34 @@ public class VanManager : MonoBehaviour
             Debug.Log(points);
             _lasTimeAddedScore = 0f;
         }
+
+        turnCD += Time.deltaTime;
+
+        if (turning)
+        {
+            _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
+
+            if (_camera.transform.rotation.eulerAngles.z >= 180.0f)
+            {
+                turning = false;
+                turnCD = 0f;
+            }
+        }
+        else
+        {
+            if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD >= 3)
+            {
+                _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
+                if (_camera.transform.rotation.eulerAngles.z < 1.0f)
+                {
+                    _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
+        }
+
+
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,12 +121,23 @@ public class VanManager : MonoBehaviour
                 Debug.Log("Player collided with a wall.");
                 jauge++;
                 crashCount++;
-                StartCoroutine(TakeDamage());    
-                if (crashCount == 5)
+                StartCoroutine(TakeDamage());
+                switch (crashCount)
                 {
-                    Debug.Log("Game Over.");
-                    crashed = true;
-                    SceneManager.LoadScene("EndScreens");
+                    case 1:
+                        _vanSprite.sprite = etats[0];
+                        break;
+                    case 2:
+                        _vanSprite.sprite = etats[1];
+                        break;
+                    case 3:
+                        _vanSprite.sprite = etats[2];
+                        break;
+                    case 4:
+                        Debug.Log("Game Over.");
+                        crashed = true;
+                        SceneManager.LoadScene("EndScreens");
+                        break;
                 }
                 break;
             case "+10":
@@ -113,11 +160,15 @@ public class VanManager : MonoBehaviour
             case "Oil":
                 Debug.Log("Player hit oil.");
                 jauge++;
-                StartCoroutine(ScreenRotate());
+                if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD < 3)
+                    turning = false;
+                else turning = true;
+                //StartCoroutine(ScreenRotate());
                 collision.gameObject.SetActive(false);
                 break;
 
             case "Hole":
+                crashed = true;
                 SceneManager.LoadScene("EndScreens");
                 break;
 
@@ -131,11 +182,8 @@ public class VanManager : MonoBehaviour
 
     IEnumerator ScreenRotate()
     {
-        _camera.transform.Rotate(0, 0, 180);
-
         yield return new WaitForSeconds(3);
-
-        _camera.transform.Rotate(0, 0, -180);
+        turning = false;
         yield return null;
     }
 
@@ -153,5 +201,5 @@ public class VanManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         _vanSprite.color = new Color(0f, 0.6f, 0f, 1f);
         yield return null;
-    }    
+    }
 }
