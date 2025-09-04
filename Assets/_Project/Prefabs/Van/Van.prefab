@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772707970831683522}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.75, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
@@ -158,8 +158,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 586b0b75b9f6fba4fa17834e1f931bf5, type: 3}
   - {fileID: 21300000, guid: bcb0008e9d5e33649ba24879162a1b98, type: 3}
   - {fileID: 21300000, guid: ced55b1891dcd0346a25a86c68a5f68c, type: 3}
-  jauge: 1
+  _addScoreOnKirbyCollision: 20
+  _addScoreOnWallCollision: 30
   _addScorePerSecond: -1
+  Bonus:
+  - {fileID: 8300000, guid: b0dee1173c331fe4784d70178a8ccb69, type: 3}
+  - {fileID: 8300000, guid: 8f79e514a6793ed46b513b1a87014dd9, type: 3}
+  Malus: {fileID: 8300000, guid: e6a36c15678c148488ba3c1ef87bd3e0, type: 3}
+  Oil: {fileID: 8300000, guid: 83a9fbd866594bf41aa785eab2a1f475, type: 3}
+  Fall: {fileID: 8300000, guid: 9685a0f8d2720f141ae05b59804ca1a2, type: 3}
+  Kirby: {fileID: 8300000, guid: 1c30bcd42cf174546a4b482c7b1416ec, type: 3}
+  Bounces: {fileID: 0}
 --- !u!114 &578683034957215300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   limite_X: 5
-  speed_Y: 1
-  limite_Y: 1
 --- !u!50 &4546253244396938577
 Rigidbody2D:
   serializedVersion: 5

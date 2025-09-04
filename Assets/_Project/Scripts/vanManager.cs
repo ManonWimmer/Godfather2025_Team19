@@ -36,8 +36,12 @@ public class VanManager : MonoBehaviour
     private float _lasTimeAddedScore = 0f;
 
     [Header("SoundsFX")]
-    [SerializeField] AudioClip Bonus;
+    [SerializeField] AudioClip[] Bonus;
     [SerializeField] AudioClip Malus;
+    [SerializeField] AudioClip Oil;
+    [SerializeField] AudioClip Fall;
+    [SerializeField] AudioClip Kirby;
+    [SerializeField] AudioClip Bounces;
 
 
     // 4 crash donc 5eme GO 
@@ -131,7 +135,7 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 jaugeReset = 0f;
                 Debug.Log("Points: " + points);
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "Wall":
@@ -164,7 +168,7 @@ public class VanManager : MonoBehaviour
                 jauge++;
                 jaugeReset = 0f;
                 Debug.Log("Points: " + points);
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
             case "-5":
@@ -188,22 +192,25 @@ public class VanManager : MonoBehaviour
                     turning = false;
                 else turning = true;
                 //StartCoroutine(ScreenRotate());
+                SoundManager.instance.PlaySoundFXClip(Oil, transform);
                 collision.gameObject.SetActive(false);
                 break;
 
             case "Hole":
+                SoundManager.instance.PlaySoundFXClip(Fall, transform);
                 crashed = true;
                 SceneManager.LoadScene("EndScreens");
                 break;
 
             case "x2":
                 points *= 2;
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
                 collision.gameObject.SetActive(false);
                 break;
 
             case "Kirby":
                 points += _addScoreOnKirbyCollision;
+                SoundManager.instance.PlaySoundFXClip(Kirby, transform);
                 collision.gameObject.SetActive(false);
                 break;
 
