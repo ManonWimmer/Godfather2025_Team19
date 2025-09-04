@@ -42,7 +42,9 @@ public class RandomGenerator : MonoBehaviour
 
     private float _lastSpawnedTime = 0f;
 
-
+    private bool _canSpawnOnRoad = true;
+    private SpawnObjectType _currentRoadType = SpawnObjectType.Road;
+    private bool _justChangedRoad = false;
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
 
     // ----- FIELDS ----- //
@@ -65,27 +67,30 @@ public class RandomGenerator : MonoBehaviour
     }
 
     public void SetNewRandoms()
-    {
+    {   
         bool canSpawnWall = true;
         bool canSpawnCollectible = true;
 
-        // Can only spawn 1 wall max & 1 collectible max
-        foreach(Transform randomTransform in _randomTransforms)
+        if (_canSpawnOnRoad)
         {
-            float random = Random.Range(0f, 1f);
-            //Debug.Log(random);
-            
-            if (random <= _wallFinalMaxProba && canSpawnWall)
+            // Can only spawn 1 wall max & 1 collectible max
+            foreach (Transform randomTransform in _randomTransforms)
             {
-                // Spawn wall
-                PoolManager.Instance.SpawnObject(SpawnObjectType.Wall, randomTransform.position);
-                canSpawnWall = false;
-            }
-            else if (random > _wallFinalMaxProba && random <= _collectibleFinalMaxProba && canSpawnCollectible)
-            {
-                // Spawn collectible
-                PoolManager.Instance.SpawnObject(SpawnObjectType.Collectible, randomTransform.position);
-                canSpawnCollectible = false;
+                float random = Random.Range(0f, 1f);
+                //Debug.Log(random);
+
+                if (random <= _wallFinalMaxProba && canSpawnWall)
+                {
+                    // Spawn wall
+                    PoolManager.Instance.SpawnObject(SpawnObjectType.Wall, randomTransform.position);
+                    canSpawnWall = false;
+                }
+                else if (random > _wallFinalMaxProba && random <= _collectibleFinalMaxProba && canSpawnCollectible)
+                {
+                    // Spawn collectible
+                    PoolManager.Instance.SpawnObject(SpawnObjectType.Collectible, randomTransform.position);
+                    canSpawnCollectible = false;
+                }
             }
         }
 
@@ -106,8 +111,9 @@ public class RandomGenerator : MonoBehaviour
         _lastSpawnedTime += Time.deltaTime;
         if (_lastSpawnedTime > _timeBetweenSpawns)
         {
-            SetNewRandoms();
-            _lastSpawnedTime = 0f;
+            
+
+            
 
             if (_currentNbrGenerations > _nbrMaxGenerations)
             {
@@ -119,10 +125,44 @@ public class RandomGenerator : MonoBehaviour
                 if (_roadChanges[_currentRoadChangeIndex].NbrGenerationsChange == _currentNbrGenerations)
                 {
                     RoadGenerator.Instance.SetNewRoadType(_roadChanges[_currentRoadChangeIndex].RoadType);
+                    _currentRoadType = _roadChanges[_currentRoadChangeIndex].RoadType;
                     _currentRoadChangeIndex++;
-                }
-                
+                    _justChangedRoad = true;
+                }  
             }
+
+            GetCanSpawnOnRoad();
+
+            SetNewRandoms();
+            _lastSpawnedTime = 0f;
         }
     }
+
+    private void GetCanSpawnOnRoad()
+    {
+        _canSpawnOnRoad = true;
+
+        if (_justChangedRoad)
+        {
+            _canSpawnOnRoad = false;
+            _justChangedRoad = false;
+            return;
+        }    
+
+        if (_currentRoadChangeIndex < _roadChanges.Count)
+        {
+            int changeGeneration = _roadChanges[_currentRoadChangeIndex].NbrGenerationsChange;
+
+            if (_currentNbrGenerations == changeGeneration - 1 || _currentNbrGenerations == changeGeneration || _currentNbrGenerations == changeGeneration + 1)
+            {
+                _canSpawnOnRoad = false;
+            }
+            
+            //Debug.Log($"Current Gen: {_currentNbrGenerations}, Next Change: {_roadChanges[_currentRoadChangeIndex].NbrGenerationsChange}, Can Spawn: {_canSpawnOnRoad}");
+        }
+
+        if (_currentRoadType == SpawnObjectType.Road2)
+            _canSpawnOnRoad = false;
+    }
+
 }
