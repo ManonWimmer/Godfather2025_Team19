@@ -24,6 +24,8 @@ public class VanManager : MonoBehaviour
     private float malus2 = 10f;
     private bool turning = false;
     private float turnCD = 0f;
+    [SerializeField] private int _addScoreOnKirbyCollision = 20;
+    [SerializeField] private int _addScoreOnWallCollision = 30;
 
     [Header("Jauge")]
     [SerializeField] private float jauge = 1f;
@@ -135,7 +137,7 @@ public class VanManager : MonoBehaviour
             case "Wall":
                 Debug.Log("Player collided with a wall.");
                 jauge++;
-                points += 30 * jauge;
+                points += _addScoreOnWallCollision * jauge;
                 jaugeReset = 0f;
                 crashCount++;
                 StartCoroutine(TakeDamage());
@@ -197,6 +199,11 @@ public class VanManager : MonoBehaviour
             case "x2":
                 points *= 2;
                 SoundManager.instance.PlaySoundFXClip(Bonus, transform);
+                collision.gameObject.SetActive(false);
+                break;
+
+            case "Kirby":
+                points += _addScoreOnKirbyCollision;
                 collision.gameObject.SetActive(false);
                 break;
 
