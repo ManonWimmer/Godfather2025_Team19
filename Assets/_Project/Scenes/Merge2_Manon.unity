@@ -1623,14 +1623,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RandomGenerator
       objectReference: {fileID: 0}
-    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
-      propertyPath: _wallSpawnProbability
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
-      propertyPath: _collectibleSpawnProbability
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
