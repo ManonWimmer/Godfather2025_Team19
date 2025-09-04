@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1583014080502999879, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
+      propertyPath: m_Name
+      value: ScoreBox
+      objectReference: {fileID: 0}
     - target: {fileID: 4289925310554388663, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -530,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 4289925310554388663, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4928936467522232707, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
+      propertyPath: m_Name
+      value: ScoreTxt
       objectReference: {fileID: 0}
     - target: {fileID: 8410822956356110465, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
       propertyPath: m_Name
@@ -872,6 +880,18 @@ PrefabInstance:
       propertyPath: _UIPoints
       value: 
       objectReference: {fileID: 1309051757}
+    - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: _UIPointsGO
+      value: 
+      objectReference: {fileID: 2007397637}
+    - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: _UIPointsTxt
+      value: 
+      objectReference: {fileID: 1309051757}
+    - target: {fileID: 317341665212891065, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: _collectibleAnimationTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1772707970831683522, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: m_Name
       value: --- Van ----
@@ -886,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8994765474837519698, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8994765474837519698, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -921,6 +941,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+--- !u!1 &2007397637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1583014080502999879, guid: 3a9b4dfa558064b44be311e173142a9b, type: 3}
+  m_PrefabInstance: {fileID: 1309051756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2047434675
 PrefabInstance:
   m_ObjectHideFlags: 0

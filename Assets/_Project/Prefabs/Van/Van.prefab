@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 317341665212891065}
   - component: {fileID: 578683034957215300}
   - component: {fileID: 4546253244396938577}
+  - component: {fileID: 5699385372286885464}
   m_Layer: 0
   m_Name: Van
   m_TagString: Van
@@ -149,9 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b1527c8011a444db7e85b36d5d98f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashCount: 0
-  boxCollider: {fileID: 0}
-  _UIPoints: {fileID: 0}
+  _UIPointsTxt: {fileID: 0}
+  _UIPointsGO: {fileID: 0}
   _camera: {fileID: 0}
   _vanSprite: {fileID: 5947360113989374479}
   etats:
@@ -169,6 +169,7 @@ MonoBehaviour:
   Fall: {fileID: 8300000, guid: 9685a0f8d2720f141ae05b59804ca1a2, type: 3}
   Kirby: {fileID: 8300000, guid: 1c30bcd42cf174546a4b482c7b1416ec, type: 3}
   Bounces: {fileID: 0}
+  _collectibleAnimationTime: 1
 --- !u!114 &578683034957215300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,3 +211,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5699385372286885464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772707970831683522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32083224530343045bbc0cc87543a835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _strength: 0.05
+  _vibrato: 15
+  _random: 0
