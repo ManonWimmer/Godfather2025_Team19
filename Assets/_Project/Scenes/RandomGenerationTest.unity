@@ -2092,7 +2092,7 @@ MonoBehaviour:
   - {fileID: 796782634}
   _wallSpawnProbability: 0.25
   _collectibleSpawnProbability: 0.166
-  _speedMultiplier: 1.0001
+  _addSpeedPerSecond: 0.01
   _startSpeed: 5
   _timeBetweenSpawns: 1
   _roadChanges:

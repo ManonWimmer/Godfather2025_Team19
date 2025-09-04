@@ -29,10 +29,12 @@ public class RandomGenerator : MonoBehaviour
     private float _collectibleFinalMaxProba = 0f;
 
     [Header("Speed & Time")]
-    [SerializeField] private float _speedMultiplier = 1.05f;
+    [SerializeField] private float _addSpeedPerSecond = 0.1f;
     [SerializeField] private float _startSpeed = 5f;
     [SerializeField] private float _timeBetweenSpawns = 1f;
     private float _currentSpeed = 5f;
+
+    private float _lastTimeAddedSpeed = 0f;
 
     [Header("Roads")]
     [SerializeField] private List<RoadChange> _roadChanges = new List<RoadChange>();
@@ -95,7 +97,11 @@ public class RandomGenerator : MonoBehaviour
     {
         if (!_canGenerate) return;
 
-        _currentSpeed = _currentSpeed + _speedMultiplier * Time.deltaTime;
+        _lastTimeAddedSpeed += Time.deltaTime;
+        if (_lastTimeAddedSpeed > 1.0f)
+        {
+            _currentSpeed += _addSpeedPerSecond;
+        }
 
         _lastSpawnedTime += Time.deltaTime;
         if (_lastSpawnedTime > _timeBetweenSpawns)
