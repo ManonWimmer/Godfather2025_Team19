@@ -29,7 +29,7 @@ public class RandomGenerator : MonoBehaviour
     private float _collectibleFinalMaxProba = 0f;
 
     [Header("Speed & Time")]
-    [SerializeField] private float _addSpeedPerSecond = 0.1f;
+    [SerializeField] private float _addSpeedPerSecond = 0.01f;
     [SerializeField] private float _startSpeed = 5f;
     [SerializeField] private float _timeBetweenSpawns = 1f;
     private float _currentSpeed = 5f;
