@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+public struct RoadChange
+{
+    public SpawnObjectType RoadType;
+    public int NbrGenerationsChange;
+}
+
 public class RandomGenerator : MonoBehaviour
 {
     // ----- FIELDS ----- //
@@ -28,9 +35,11 @@ public class RandomGenerator : MonoBehaviour
     private float _currentSpeed = 5f;
 
     [Header("Roads")]
-    [SerializeField] private int _road2Generations = 4;
+    [SerializeField] private List<RoadChange> _roadChanges = new List<RoadChange>();
+    private int _currentRoadChangeIndex = 0;
 
     private float _lastSpawnedTime = 0f;
+
 
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
 
@@ -99,9 +108,14 @@ public class RandomGenerator : MonoBehaviour
                 _canGenerate = false;
                 GameManager.Instance.StartVictory();
             }
-            else if (_currentNbrGenerations == _road2Generations)
+            else if (_currentRoadChangeIndex < _roadChanges.Count)
             {
-                RoadGenerator.Instance.SetNewRoadType(SpawnObjectType.Road2);
+                if (_roadChanges[_currentRoadChangeIndex].NbrGenerationsChange == _currentNbrGenerations)
+                {
+                    RoadGenerator.Instance.SetNewRoadType(_roadChanges[_currentRoadChangeIndex].RoadType);
+                    _currentRoadChangeIndex++;
+                }
+                
             }
         }
     }

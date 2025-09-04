@@ -2085,7 +2085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98de0dcd32f76e54c8be5dbd9d4771aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nbrMaxGenerations: 10
+  _nbrMaxGenerations: 30
   _randomTransforms:
   - {fileID: 751368993}
   - {fileID: 801633266}
@@ -2095,7 +2095,19 @@ MonoBehaviour:
   _speedMultiplier: 1.0001
   _startSpeed: 5
   _timeBetweenSpawns: 1
-  _road2Generations: 4
+  _roadChanges:
+  - RoadType: 3
+    NbrGenerationsChange: 3
+  - RoadType: 2
+    NbrGenerationsChange: 6
+  - RoadType: 3
+    NbrGenerationsChange: 10
+  - RoadType: 2
+    NbrGenerationsChange: 13
+  - RoadType: 3
+    NbrGenerationsChange: 15
+  - RoadType: 2
+    NbrGenerationsChange: 18
 --- !u!1001 &1680468915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2739,7 +2751,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roadSpawn: {fileID: 1811322067}
   _lastSpawnedRoadTransform: {fileID: 1827553295}
-  _nbrRoadOnScreen: 3
   _roadHeight: 9.5
 --- !u!1001 &2096066053
 PrefabInstance:
