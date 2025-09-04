@@ -29,6 +29,7 @@ public class RandomGenerator : MonoBehaviour
     private float _collectibleFinalMaxProba = 0f;
 
     [Header("Speed & Time")]
+    [SerializeField] private float _maxSpeed = 15f;
     [SerializeField] private float _addSpeedPerSecond = 0.01f;
     [SerializeField] private float _startSpeed = 5f;
     [SerializeField] private float _timeBetweenSpawns = 1f;
@@ -108,6 +109,7 @@ public class RandomGenerator : MonoBehaviour
         if (_lastTimeAddedSpeed > 1.0f)
         {
             _currentSpeed += _addSpeedPerSecond;
+            _currentSpeed = Mathf.Clamp(_currentSpeed, 0, _maxSpeed);
         }
 
         _lastSpawnedTime += Time.deltaTime;
