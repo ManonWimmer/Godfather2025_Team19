@@ -847,6 +847,10 @@ PrefabInstance:
       propertyPath: _UIPointsTxt
       value: 
       objectReference: {fileID: 1309051757}
+    - target: {fileID: 578683034957215300, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1772707970831683522, guid: a09b011a63f07a84fa08768d56ce3a61, type: 3}
       propertyPath: m_Name
       value: --- Van ----
@@ -1255,6 +1259,10 @@ PrefabInstance:
     - target: {fileID: 6246199909100427639, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
       propertyPath: m_Name
       value: RandomGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _addSpeedPerSecond
+      value: 0.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
