@@ -1261,6 +1261,10 @@ PrefabInstance:
       value: RandomGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _maxSpeed
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
       propertyPath: _addSpeedPerSecond
       value: 0.07
       objectReference: {fileID: 0}
