@@ -1,34 +1,42 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class VanManager : MonoBehaviour
 {
-    public static float points = 0f;
-    public static bool crashed = false;
-    [SerializeField] private int crashCount = 0;
-    public BoxCollider2D boxCollider;
-    [SerializeField] private TextMeshProUGUI _UIPoints;
+    [HideInInspector] public static float points = 0f;
+    [HideInInspector] public static bool crashed = false;
+
+    private int crashCount = 0;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI _UIPointsTxt;
+    [SerializeField] private GameObject _UIPointsGO;
+
+    [Header("References")]
     [SerializeField] private GameObject _camera;
     [SerializeField] private SpriteRenderer _vanSprite;
 
     [Header("Sprite Van")]
     [SerializeField] private List<Sprite> etats = new List<Sprite>();
 
-    [Header("Collectibles")]
+    [Header("Add Score Collectibles")]
+    [SerializeField] private int _addScoreOnKirbyCollision = 20;
+    [SerializeField] private int _addScoreOnWallCollision = 30;
+
     private float bonus1 = 5f;
     private float bonus2 = 10f;
     private float malus1 = 5f;
     private float malus2 = 10f;
+
     private bool turning = false;
     private float turnCD = 0f;
-    [SerializeField] private int _addScoreOnKirbyCollision = 20;
-    [SerializeField] private int _addScoreOnWallCollision = 30;
 
-    [Header("Combo")]
-    public static float jauge = 1f;
+    [HideInInspector] public static float jauge = 1f;
     private float jaugeReset = 0f;
 
     [Header("Score")]
@@ -36,42 +44,23 @@ public class VanManager : MonoBehaviour
     private float _lasTimeAddedScore = 0f;
 
     [Header("SoundsFX")]
-    [SerializeField] AudioClip Bonus;
-    [SerializeField] AudioClip Malus;
+    [SerializeField] private AudioClip[] Bonus;
+    [SerializeField] private AudioClip Malus;
+    [SerializeField] private AudioClip Oil;
+    [SerializeField] private AudioClip Fall;
+    [SerializeField] private AudioClip Kirby;
+    [SerializeField] private AudioClip Bounces;
 
+    [Header("Polish")]
+    [SerializeField] private float _collectibleAnimationTime = 1f;
 
     // 4 crash donc 5eme GO 
     // jauge mutiply *1 *2* *3
 
-    void Start()
-    {
-        boxCollider = GetComponent<BoxCollider2D>();
-        Debug.Log("Points: " + points);
-        Debug.Log("Points: " + points);
-        crashCount = 0;
-        jaugeReset = 0f;
-    }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Wall"))
-    //    {
-    //        Debug.Log("Player collided with a wall.");
-    //        jauge++;
-    //        crashCount++;
-    //        if (crashCount == 5)
-    //        {
-    //            Debug.Log("Game Over.");
-    //            crashed = true;
-    //            SceneManager.LoadScene("EndScreens");
-    //        }
-
-    //    }
-
-    //}
     private void Update()
     {
-        _UIPoints.text = points.ToString();
+        _UIPointsTxt.text = points.ToString();
 
         if (jaugeReset >= 2f)
         {
@@ -89,18 +78,19 @@ public class VanManager : MonoBehaviour
         if (_lasTimeAddedScore > 1f)
         {
             points += _addScorePerSecond;
-            Debug.Log(points);
+            PointsLittlePopUpAnimation();
             _lasTimeAddedScore = 0f;
         }
 
         jaugeReset += Time.deltaTime;
         turnCD += Time.deltaTime;
 
+        // Turn camera
         if (turning)
         {
             _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
 
-            if (_camera.transform.rotation.eulerAngles.z >= 180.0f)
+            if (_camera.transform.rotation.eulerAngles.z >= 270.0f)
             {
                 turning = false;
                 turnCD = 0f;
@@ -108,19 +98,16 @@ public class VanManager : MonoBehaviour
         }
         else
         {
-            if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD >= 3)
+            if (_camera.transform.rotation.eulerAngles.z != 90 && turnCD >= 3)
             {
                 _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
-                if (_camera.transform.rotation.eulerAngles.z < 1.0f)
+
+                if (_camera.transform.rotation.eulerAngles.z >= 360.0f || _camera.transform.rotation.eulerAngles.z < 91.0f)
                 {
-                    _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    _camera.transform.rotation = Quaternion.Euler(0, 0, 90);
                 }
             }
         }
-
-
-
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -128,19 +115,27 @@ public class VanManager : MonoBehaviour
         {
             case "+5":
                 points += bonus1 * jauge;
+                PointsBigPopUpAnimation();
+
                 jauge++;
                 jaugeReset = 0f;
-                Debug.Log("Points: " + points);
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
-                collision.gameObject.SetActive(false);
+
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
+
             case "Wall":
-                Debug.Log("Player collided with a wall.");
+                Debug.Log($"Player collided with a wall - {collision.gameObject.name}");
                 jauge++;
                 points += _addScoreOnWallCollision * jauge;
+                PointsBigPopUpAnimation();
+
                 jaugeReset = 0f;
                 crashCount++;
+
                 StartCoroutine(TakeDamage());
+
                 switch (crashCount)
                 {
                     case 1:
@@ -159,52 +154,73 @@ public class VanManager : MonoBehaviour
                         break;
                 }
                 break;
+
             case "+10":
                 points += bonus2 * jauge;
+                PointsBigPopUpAnimation();
+
                 jauge++;
                 jaugeReset = 0f;
-                Debug.Log("Points: " + points);
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
-                collision.gameObject.SetActive(false);
+                
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
+
             case "-5":
                 points -= malus1;
-                Debug.Log("Points: " + points);
+                PointsBigPopUpAnimation();
+
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
-                collision.gameObject.SetActive(false);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
+
             case "-10":
                 points -= malus2;
-                Debug.Log("Points: " + points);
+                PointsBigPopUpAnimation();
+
                 SoundManager.instance.PlaySoundFXClip(Malus, transform);
-                collision.gameObject.SetActive(false);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
 
             case "Oil":
                 Debug.Log("Player hit oil.");
 
                 jaugeReset = 10f;
+
                 if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD < 3)
                     turning = false;
                 else turning = true;
-                //StartCoroutine(ScreenRotate());
-                collision.gameObject.SetActive(false);
+
+                SoundManager.instance.PlaySoundFXClip(Oil, transform);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
 
             case "Hole":
+                SoundManager.instance.PlaySoundFXClip(Fall, transform);
                 crashed = true;
                 SceneManager.LoadScene("EndScreens");
                 break;
 
             case "x2":
                 points *= 2;
-                SoundManager.instance.PlaySoundFXClip(Bonus, transform);
-                collision.gameObject.SetActive(false);
+                PointsBigPopUpAnimation();
+
+                SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
 
             case "Kirby":
                 points += _addScoreOnKirbyCollision;
-                collision.gameObject.SetActive(false);
+                PointsBigPopUpAnimation();
+
+                SoundManager.instance.PlaySoundFXClip(Kirby, transform);
+
+                CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
 
             default:
@@ -214,12 +230,26 @@ public class VanManager : MonoBehaviour
 
     }
 
-
-    IEnumerator ScreenRotate()
+    private void PointsBigPopUpAnimation()
     {
-        yield return new WaitForSeconds(3);
-        turning = false;
-        yield return null;
+        _UIPointsGO.transform.DOScale(1.2f, 0.3f).SetEase(Ease.OutBack)
+         .OnComplete(() => _UIPointsGO.transform.DOScale(1f, 0.2f));
+    }
+
+    private void PointsLittlePopUpAnimation()
+    {
+        _UIPointsGO.transform.DOScale(.95f, 0.2f).SetEase(Ease.OutBack)
+         .OnComplete(() => _UIPointsGO.transform.DOScale(1f, 0.1f));
+    }
+
+    private void CollectibleAnimationAndDeactivate(GameObject collectible)
+    {
+        float startScale = collectible.transform.localScale.x;
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(collectible.transform.DOScale(startScale * 1.3f, _collectibleAnimationTime).SetEase(Ease.OutBack));
+        seq.Append(collectible.transform.DOScale(startScale, _collectibleAnimationTime / 2));
+        seq.OnComplete(() => collectible.SetActive(false));
     }
 
     IEnumerator TakeDamage()

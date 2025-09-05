@@ -26,9 +26,9 @@ public class MovingObject : MonoBehaviour
             int random = Random.Range(0, 1);
 
             if (random == 0)
-                _kirbyDirection = new Vector3(.75f, 0, 0);
+                _kirbyDirection = new Vector3(.1f, 0, 0);
             else
-                _kirbyDirection = new Vector3(-.75f, 0, 0);
+                _kirbyDirection = new Vector3(-.1f, 0, 0);
         }
     }
 

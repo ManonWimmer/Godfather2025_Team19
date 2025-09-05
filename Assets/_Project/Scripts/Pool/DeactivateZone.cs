@@ -17,7 +17,7 @@ public class DeactivateZone : MonoBehaviour
                 collision.gameObject.SetActive(false);
             }
         }
-        else if (!collision.gameObject.CompareTag("Van"))
+        else if (!collision.gameObject.CompareTag("Van") && !collision.gameObject.CompareTag("Untagged"))
         {
             collision.gameObject.SetActive(false);
         }

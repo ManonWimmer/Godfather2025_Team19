@@ -144,7 +144,7 @@ public class PoolManager : MonoBehaviour
 
     public GameObject SpawnObject(SpawnObjectType spawnType, Vector3 spawnPosition)
     {
-        Debug.Log($"Spawn type : {spawnType}");
+        //Debug.Log($"Spawn type : {spawnType}");
         List<GameObject> children = new List<GameObject>();
         Transform parent = null;
         GameObject prefab = null;
@@ -184,7 +184,7 @@ public class PoolManager : MonoBehaviour
         }
 
         nonActiveChild.SetActive(true);
-        nonActiveChild.transform.position = spawnPosition;
+        nonActiveChild.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, nonActiveChild.transform.position.z);
 
         return nonActiveChild;
     }
@@ -202,7 +202,7 @@ public class PoolManager : MonoBehaviour
     private void GetRandomCollectibleChildrenParentAndPrefab(out List<GameObject> children, out Transform parent, out GameObject prefab)
     {
         CollectibleProbability randomCollectible = GetRandomCollectible(_collectibleProbas);
-        Debug.Log($"Random collectible : {randomCollectible.SpawnType}");
+        //Debug.Log($"Random collectible : {randomCollectible.SpawnType}");
 
         switch (randomCollectible.SpawnType)
         { 
@@ -249,7 +249,7 @@ public class PoolManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Collectible parent : {parent}");
+        //ebug.Log($"Collectible parent : {parent}");
     }
 
     public CollectibleProbability GetRandomCollectible(List<CollectibleProbability> liste)

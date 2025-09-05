@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,18 +8,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Victory")]
-    [SerializeField] private GameObject _victoryScreen;
     [SerializeField] private float _timeBeforeVictory = 2f;
     // ----- FIELDS ----- //
 
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-        _victoryScreen.SetActive(false);
     }
 
     public void StartVictory()
@@ -29,6 +24,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForVictory()
     {
         yield return new WaitForSeconds(_timeBeforeVictory);
-        _victoryScreen.SetActive(true);
+        SceneManager.LoadScene("EndScreens");
     }
 }

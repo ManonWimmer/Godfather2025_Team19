@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7952217941190355924}
   - component: {fileID: 4481468907297867935}
   - component: {fileID: -5871900734297041115}
+  - component: {fileID: 3607216456815945274}
   m_Layer: 0
   m_Name: Temp_Road
   m_TagString: Road
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3813881858068858359}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d557e578bb18b974ca242181c2277da7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,11 +140,29 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 38.42144, y: 11.200001}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 38, y: 11}
   m_EdgeRadius: 0
+--- !u!114 &3607216456815945274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813881858068858359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e583a0907496f429a4673ee1d66539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 7952217941190355924}
+  _randomRoads:
+  - {fileID: 21300000, guid: d557e578bb18b974ca242181c2277da7, type: 3}
+  - {fileID: 21300000, guid: 8b01ed81de6e6f64fb74753e5ece375d, type: 3}
+  - {fileID: 21300000, guid: 5fd7ab394ddd11847b3b3e679bf58528, type: 3}
+  - {fileID: 21300000, guid: 91ebe0fcb3b5fbe44b27fbd174343387, type: 3}
