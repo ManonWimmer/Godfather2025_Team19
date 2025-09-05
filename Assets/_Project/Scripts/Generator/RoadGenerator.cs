@@ -32,6 +32,8 @@ public class RoadGenerator : MonoBehaviour
         {
             GameObject newRoad = PoolManager.Instance.SpawnObject(_currentRoadType, _roadSpawn.position);
             _lastSpawnedRoad = newRoad.GetComponent<Road>();
+
+            /*
             if (_lastSpawnedRoad != null )
             {
                 _lastSpawnedRoad.SetupStartAndEnd(_isStart, _isEnd);
@@ -39,6 +41,7 @@ public class RoadGenerator : MonoBehaviour
 
             _isStart = false;
             _isEnd = false;
+            */
 
             _lastSpawnedRoadTransform = newRoad.transform;
         }
@@ -49,6 +52,7 @@ public class RoadGenerator : MonoBehaviour
         _lastObjectType = _currentRoadType;
         _currentRoadType = newRoadType;
 
+        /*
         if (_lastObjectType != _currentRoadType)
         {
             if (_isStarted)
@@ -69,6 +73,7 @@ public class RoadGenerator : MonoBehaviour
         {
             if (WillChangeTypeSoon()) _isEnd = true;
         }
+        */
     }
 
     private bool WillChangeTypeSoon()
