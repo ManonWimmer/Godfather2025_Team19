@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,21 @@ public class DeathTrigger : MonoBehaviour
         if (collision.CompareTag("Van"))
         {
             VanManager.crashed = true;
-            SceneManager.LoadScene("EndScreens");
+
+            // son trottoir
+
+            WaitAndLoadScene();
         }
+    }
+
+    private void WaitAndLoadScene()
+    {
+        StartCoroutine(WaitAndLoadEndScene());
+    }
+
+    private IEnumerator WaitAndLoadEndScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("EndScreens");
     }
 }

@@ -136,7 +136,7 @@ public class VanManager : MonoBehaviour
                     case 4:
                         Debug.Log("Game Over.");
                         crashed = true;
-                        SceneManager.LoadScene("EndScreens");
+                        WaitAndLoadScene();
                         break;
                 }
                 break;
@@ -191,7 +191,7 @@ public class VanManager : MonoBehaviour
             case "Hole":
                 SoundManager.instance.PlaySoundFXClip(Fall, transform);
                 crashed = true;
-                SceneManager.LoadScene("EndScreens");
+                WaitAndLoadScene();
                 break;
 
             case "x2":
@@ -247,6 +247,17 @@ public class VanManager : MonoBehaviour
         seq.Append(collectible.transform.DOScale(startScale * 1.3f, _collectibleAnimationTime).SetEase(Ease.OutBack));
         seq.Append(collectible.transform.DOScale(startScale, _collectibleAnimationTime / 2));
         seq.OnComplete(() => collectible.SetActive(false));
+    }
+
+    private void WaitAndLoadScene()
+    {
+        StartCoroutine(WaitAndLoadEndScene());
+    }
+
+    private IEnumerator WaitAndLoadEndScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("EndScreens");
     }
 
     IEnumerator TakeDamage()
