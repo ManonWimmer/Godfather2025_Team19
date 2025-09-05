@@ -127,7 +127,7 @@ public class PoolManager : MonoBehaviour
         _collectibleOilChildren = GetChildren(_oilParent);
         _collectibleHoleChildren = GetChildren(_holeParent);
 
-        _collectibleHoleChildren = GetChildren(_kirbyParent);
+        _collectibleKirbyChildren = GetChildren(_kirbyParent);
     }
 
     private List<GameObject> GetChildren(Transform parent)
@@ -185,6 +185,8 @@ public class PoolManager : MonoBehaviour
 
         nonActiveChild.SetActive(true);
         nonActiveChild.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, nonActiveChild.transform.position.z);
+
+        Debug.Log($"spawn {nonActiveChild.name}");
 
         return nonActiveChild;
     }
@@ -263,12 +265,14 @@ public class PoolManager : MonoBehaviour
 
         float randomValue = Random.value * total; 
         float cumulative = 0f;
+        Debug.Log($"Random value : {randomValue}");
 
         foreach (var s in liste)
         {
             cumulative += s.SpawnProbability;
             if (randomValue <= cumulative)
             {
+                Debug.Log(s.SpawnType);
                 return s;
             }
         }

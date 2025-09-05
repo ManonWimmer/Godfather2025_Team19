@@ -4,6 +4,7 @@ public class MovingObject : MonoBehaviour
 {
     // ----- FIELDS ----- //
     // Kirby
+    [SerializeField] private float _speedMultiplier = 1f;
     private bool _isKirby = false;
     private Vector3 _kirbyDirection;
     // ----- FIELDS ----- //
@@ -36,8 +37,8 @@ public class MovingObject : MonoBehaviour
     {
         // Move object down
         if (_isKirby)
-            transform.Translate((-transform.up + _kirbyDirection) * Time.deltaTime * RandomGenerator.Instance.CurrentSpeed);
+            transform.Translate((-transform.up + _kirbyDirection) * Time.deltaTime * RandomGenerator.Instance.CurrentSpeed * _speedMultiplier);
         else
-            transform.Translate(-transform.up * Time.deltaTime * RandomGenerator.Instance.CurrentSpeed);
+            transform.Translate(-transform.up * Time.deltaTime * RandomGenerator.Instance.CurrentSpeed * _speedMultiplier);
     }
 }
