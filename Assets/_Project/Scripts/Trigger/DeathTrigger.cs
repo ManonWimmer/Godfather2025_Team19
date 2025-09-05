@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
 {
+
+    [SerializeField] private AudioClip TrottoirHit;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Van"))
         {
             vanManager.crashed = true;
 
-            // son trottoir
+            SoundManager.instance.PlaySoundFXClip(TrottoirHit, transform);
 
             vanManager.Instance.WaitAndLoadScene();
         }
