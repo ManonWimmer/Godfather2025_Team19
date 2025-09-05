@@ -57,6 +57,7 @@ public class VanManager : MonoBehaviour
 
     [Header("Polish")]
     [SerializeField] private float _collectibleAnimationTime = 1f;
+    [SerializeField] private float _turnCameraOilDuration = 5f;
 
     // 4 crash donc 5eme GO 
     // jauge mutiply *1 *2* *3
@@ -89,31 +90,6 @@ public class VanManager : MonoBehaviour
         }
 
         jaugeReset += Time.deltaTime;
-        turnCD += Time.deltaTime;
-
-        // Turn camera
-        if (turning)
-        {
-            _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
-
-            if (_camera.transform.rotation.eulerAngles.z >= 270.0f)
-            {
-                turning = false;
-                turnCD = 0f;
-            }
-        }
-        else
-        {
-            if (_camera.transform.rotation.eulerAngles.z != 90 && turnCD >= 3)
-            {
-                _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
-
-                if ( (_camera.transform.rotation.eulerAngles.z < 0.5f || _camera.transform.rotation.eulerAngles.z > 450))
-                {
-                    _camera.transform.rotation = Quaternion.Euler(0, 0, 90);
-                }
-            }
-        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -208,6 +184,8 @@ public class VanManager : MonoBehaviour
                 SoundManager.instance.PlaySoundFXClip(Oil, transform);
 
                 CollectibleAnimationAndDeactivate(collision.gameObject);
+
+                OilTurnCamera(); 
                 break;
 
             case "Hole":
@@ -241,6 +219,14 @@ public class VanManager : MonoBehaviour
 
     }
 
+    private void OilTurnCamera()
+    {
+        Quaternion originalRotation = _camera.transform.rotation;
+
+        _camera.transform.DORotate(new Vector3(0, 0, 270f), _turnCameraOilDuration / 2, RotateMode.FastBeyond360)
+            .OnComplete(() => { _camera.transform.DORotateQuaternion(originalRotation, _turnCameraOilDuration / 2); });
+    
+    }
     private void PointsBigPopUpAnimation()
     {
         _UIPointsGO.transform.DOScale(1.2f, 0.3f).SetEase(Ease.OutBack)
