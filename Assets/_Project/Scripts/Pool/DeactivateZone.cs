@@ -10,7 +10,7 @@ public class DeactivateZone : MonoBehaviour
     {
         //Debug.Log(collision.gameObject);
 
-        if (collision.gameObject.CompareTag("Road"))
+        if (collision.gameObject.CompareTag("Road") || collision.gameObject.CompareTag("Sign"))
         {
             if (_checkForRoad)
             {

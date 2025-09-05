@@ -17,6 +17,7 @@ TagManager:
   - Oil
   - Hole
   - Kirby
+  - Sign
   layers:
   - Default
   - TransparentFX
