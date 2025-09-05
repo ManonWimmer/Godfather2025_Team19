@@ -757,6 +757,8 @@ MonoBehaviour:
   _finalPoints: {fileID: 1607265124}
   _crashMessage: {fileID: 160711025}
   _successMessage: {fileID: 952191800}
+  Win: {fileID: 8300000, guid: 47aab66f0c36b994a91ffbd078318854, type: 3}
+  Loose: {fileID: 8300000, guid: 739b6f48ad0585444addb16db6dd6826, type: 3}
 --- !u!1 &1607265122
 GameObject:
   m_ObjectHideFlags: 0
