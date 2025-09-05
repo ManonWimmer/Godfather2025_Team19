@@ -78,4 +78,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roadSpawn: {fileID: 115277896690552381}
   _lastSpawnedRoadTransform: {fileID: 0}
-  _roadHeight: 10.35
+  _roadHeight: 10.25

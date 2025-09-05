@@ -59,12 +59,19 @@ public class vanManager : MonoBehaviour
     [SerializeField] private float _turnCameraOilDuration = 5f;
 
     private bool _canGainPoints = true;
+    private bool _canTurnCamera = true;
 
     // 4 crash donc 5eme GO 
     // jauge mutiply *1 *2* *3
     private void Awake()
     {
         Instance = this;    
+    }
+
+    private void Start()
+    {
+        points = 0;
+        jauge = 1f;
     }
 
     private void Update()
@@ -223,10 +230,13 @@ public class vanManager : MonoBehaviour
 
     private void OilTurnCamera()
     {
+        if (!_canTurnCamera) return;
+
+        _canTurnCamera = false;
         Quaternion originalRotation = _camera.transform.rotation;
 
         _camera.transform.DORotate(new Vector3(0, 0, 270f), _turnCameraOilDuration / 2, RotateMode.FastBeyond360)
-            .OnComplete(() => { _camera.transform.DORotateQuaternion(originalRotation, _turnCameraOilDuration / 2); });
+            .OnComplete(() => { _camera.transform.DORotateQuaternion(originalRotation, _turnCameraOilDuration / 2); _canTurnCamera = true; });
     
     }
     private void PointsBigPopUpAnimation()
