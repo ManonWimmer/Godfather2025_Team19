@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class EndScreen : MonoBehaviour
 
     private void Start()
     {
-        _finalPoints.text = "Points: " + VanManager.points.ToString();
+        _finalPoints.text =  VanManager.points.ToString();
         if (VanManager.crashed)
         {
             _crashMessage.SetActive(true);
@@ -20,6 +21,14 @@ public class EndScreen : MonoBehaviour
             _successMessage.SetActive(true);
         }
 
+
+    }
+    void Update()
+    {
+        if (Input.anyKey)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
 }
