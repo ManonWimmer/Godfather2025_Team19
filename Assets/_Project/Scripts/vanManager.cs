@@ -48,11 +48,12 @@ public class VanManager : MonoBehaviour
 
     [Header("SoundsFX")]
     [SerializeField] private AudioClip[] Bonus;
-    [SerializeField] private AudioClip Malus;
+    [SerializeField] private AudioClip[] Malus;
+    [SerializeField] private AudioClip Wall;
     [SerializeField] private AudioClip Oil;
     [SerializeField] private AudioClip Fall;
     [SerializeField] private AudioClip Kirby;
-    [SerializeField] private AudioClip Bounces;
+    //[SerializeField] private AudioClip[] Bounces;
 
     [Header("Polish")]
     [SerializeField] private float _collectibleAnimationTime = 1f;
@@ -141,6 +142,8 @@ public class VanManager : MonoBehaviour
                 jaugeReset = 0f;
                 crashCount++;
 
+                SoundManager.instance.PlaySoundFXClip(Wall, transform);
+
                 StartCoroutine(TakeDamage());
 
                 switch (crashCount)
@@ -179,7 +182,7 @@ public class VanManager : MonoBehaviour
                 points -= malus1;
                 PointsBigPopUpAnimation();
 
-                SoundManager.instance.PlaySoundFXClip(Malus, transform);
+                SoundManager.instance.PlayRandomSoundFXClip(Malus, transform);
 
                 CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
@@ -188,7 +191,7 @@ public class VanManager : MonoBehaviour
                 points -= malus2;
                 PointsBigPopUpAnimation();
 
-                SoundManager.instance.PlaySoundFXClip(Malus, transform);
+                SoundManager.instance.PlayRandomSoundFXClip(Malus, transform);
 
                 CollectibleAnimationAndDeactivate(collision.gameObject);
                 break;
