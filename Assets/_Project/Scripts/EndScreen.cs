@@ -9,8 +9,8 @@ public class EndScreen : MonoBehaviour
 
     private void Start()
     {
-        _finalPoints.text =  VanManager.points.ToString();
-        if (VanManager.crashed)
+        _finalPoints.text =  vanManager.points.ToString();
+        if (vanManager.crashed)
         {
             _crashMessage.SetActive(true);
             _successMessage.SetActive(false);

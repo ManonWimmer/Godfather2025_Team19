@@ -16,9 +16,11 @@ public class RoadGenerator : MonoBehaviour
     private SpawnObjectType _lastObjectType = SpawnObjectType.Road;
     private SpawnObjectType _currentRoadType = SpawnObjectType.Road;
 
+    /*
     private bool _isStarted = false;
     private bool _isStart = false;
     private bool _isEnd = false;
+    */
     // ----- FIELDS ----- //
 
     private void Awake()

@@ -8,11 +8,11 @@ public class DeathTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Van"))
         {
-            VanManager.crashed = true;
+            vanManager.crashed = true;
 
             // son trottoir
 
-            WaitAndLoadScene();
+            vanManager.Instance.WaitAndLoadScene();
         }
     }
 

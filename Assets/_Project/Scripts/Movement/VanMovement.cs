@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class RoadMovement : MonoBehaviour
+public class VanMovement : MonoBehaviour
 {
     public float speed = 10f; 
     public float limite_X = 1.5f; 
     //public float speed_Y = 3f;
     //public float limite_Y = 2.75f;
     float moveInput_X;
+
+    public bool CanMove = true;
     //float moveInput_Y;
 
     void FixedUpdate()
     {
+        if (!CanMove) return;
+
         moveInput_X = Input.GetAxis("Vertical");
         //moveInput_Y = Input.GetAxis("Vertical");
 

@@ -106,7 +106,7 @@ public class RandomGenerator : MonoBehaviour
         if (!_canGenerate) return;
 
         _lastTimeAddedSpeed += Time.deltaTime;
-        if (_lastTimeAddedSpeed > 1.0f)
+        if (_lastTimeAddedSpeed > 1.0f && _currentSpeed > 0)
         {
             _currentSpeed += _addSpeedPerSecond;
             _currentSpeed = Mathf.Clamp(_currentSpeed, 0, _maxSpeed);

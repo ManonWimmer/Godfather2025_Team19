@@ -29,7 +29,7 @@ public class UIcombo : MonoBehaviour
 
     public void UpdateCombo()
     {
-        if (VanManager.jauge == 1f)
+        if (vanManager.jauge == 1f)
         {
             Debug.Log(fleche.rectTransform.rotation);
             //Debug.Log("Jauge 1");
@@ -41,7 +41,7 @@ public class UIcombo : MonoBehaviour
             fleche.rectTransform.rotation = Quaternion.Euler(0, 0, 93);
 
         }
-        else if (VanManager.jauge == 2f)
+        else if (vanManager.jauge == 2f)
         {
             Debug.Log(fleche.rectTransform.rotation);
             //Debug.Log("Jauge 2");
@@ -52,7 +52,7 @@ public class UIcombo : MonoBehaviour
             trois[0].gameObject.SetActive(true);
             fleche.rectTransform.rotation = Quaternion.Euler(0, 0, 1);
         }
-        else if (VanManager.jauge == 3f)
+        else if (vanManager.jauge == 3f)
         {
             Debug.Log(fleche.rectTransform.rotation);
             //Debug.Log("Jauge 3");

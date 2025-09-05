@@ -7,8 +7,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class VanManager : MonoBehaviour
+public class vanManager : MonoBehaviour
 {
+    public static vanManager Instance;
+
     [HideInInspector] public static float points = 0f;
     [HideInInspector] public static bool crashed = false;
 
@@ -34,9 +36,6 @@ public class VanManager : MonoBehaviour
     private float malus1 = 5f;
     private float malus2 = 10f;
 
-    private bool turning = false;
-    private float turnCD = 0f;
-
     [Header("Combo")]
     [HideInInspector] public static float jauge = 1f;
     private float jaugeReset = 0f;
@@ -59,12 +58,19 @@ public class VanManager : MonoBehaviour
     [SerializeField] private float _collectibleAnimationTime = 1f;
     [SerializeField] private float _turnCameraOilDuration = 5f;
 
+    private bool _canGainPoints = true;
+
     // 4 crash donc 5eme GO 
     // jauge mutiply *1 *2* *3
-
+    private void Awake()
+    {
+        Instance = this;    
+    }
 
     private void Update()
     {
+        if (!_canGainPoints) return;
+
         _UIPointsTxt.text = points.ToString();
 
         if (jaugeReset >= 2f)
@@ -177,10 +183,6 @@ public class VanManager : MonoBehaviour
 
                 jaugeReset = 10f;
 
-                if (_camera.transform.rotation.eulerAngles.z != 0 && turnCD < 3)
-                    turning = false;
-                else turning = true;
-
                 SoundManager.instance.PlaySoundFXClip(Oil, transform);
 
                 CollectibleAnimationAndDeactivate(collision.gameObject);
@@ -249,8 +251,9 @@ public class VanManager : MonoBehaviour
         seq.OnComplete(() => collectible.SetActive(false));
     }
 
-    private void WaitAndLoadScene()
+    public void WaitAndLoadScene()
     {
+        StopAllMovements();
         StartCoroutine(WaitAndLoadEndScene());
     }
 
@@ -258,6 +261,19 @@ public class VanManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("EndScreens");
+    }
+
+    private void StopAllMovements()
+    {
+        // Stop Van Movement
+        VanMovement vanMove = GetComponent<VanMovement>();
+        if (vanMove != null) vanMove.CanMove = false;
+
+        // Stop Road Movement
+        RandomGenerator.Instance.CurrentSpeed = 0f;
+
+        // Stop points
+        _canGainPoints = false;
     }
 
     IEnumerator TakeDamage()
