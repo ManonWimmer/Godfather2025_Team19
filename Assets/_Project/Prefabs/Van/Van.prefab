@@ -123,12 +123,15 @@ MonoBehaviour:
   Bonus:
   - {fileID: 8300000, guid: b0dee1173c331fe4784d70178a8ccb69, type: 3}
   - {fileID: 8300000, guid: 8f79e514a6793ed46b513b1a87014dd9, type: 3}
-  Malus: {fileID: 8300000, guid: e6a36c15678c148488ba3c1ef87bd3e0, type: 3}
+  Malus:
+  - {fileID: 8300000, guid: e6a36c15678c148488ba3c1ef87bd3e0, type: 3}
+  - {fileID: 8300000, guid: eadd981d89df79949a1e4186348ae700, type: 3}
+  Wall: {fileID: 8300000, guid: 4de8cabe31451044aa9b7adb02cd8868, type: 3}
   Oil: {fileID: 8300000, guid: 83a9fbd866594bf41aa785eab2a1f475, type: 3}
   Fall: {fileID: 8300000, guid: 9685a0f8d2720f141ae05b59804ca1a2, type: 3}
   Kirby: {fileID: 8300000, guid: 1c30bcd42cf174546a4b482c7b1416ec, type: 3}
-  Bounces: {fileID: 0}
   _collectibleAnimationTime: 0.25
+  _turnCameraOilDuration: 5
 --- !u!114 &578683034957215300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,8 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0fb325a550b8c4d85f3e3ee77ba352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   limite_X: 9
+  CanMove: 1
 --- !u!50 &4546253244396938577
 Rigidbody2D:
   serializedVersion: 5
