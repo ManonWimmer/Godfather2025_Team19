@@ -828,6 +828,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 966842760493888868, guid: 9d9d3815867a09e41a5b4f046b4d218e, type: 3}
+      propertyPath: _collectibleProbas.Array.data[6].SpawnProbability
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1822219342113114151, guid: 9d9d3815867a09e41a5b4f046b4d218e, type: 3}
       propertyPath: m_Name
       value: PoolManager
