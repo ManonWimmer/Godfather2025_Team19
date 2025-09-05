@@ -199,6 +199,7 @@ public class vanManager : MonoBehaviour
 
             case "Hole":
                 SoundManager.instance.PlaySoundFXClip(Fall, transform);
+                FadeVanAnimation();
                 crashed = true;
                 WaitAndLoadScene();
                 break;
@@ -284,6 +285,11 @@ public class vanManager : MonoBehaviour
 
         // Stop points
         _canGainPoints = false;
+    }
+
+    private void FadeVanAnimation()
+    {
+        _vanSprite.DOFade(0f, 1f);
     }
 
     IEnumerator TakeDamage()
