@@ -1105,6 +1105,10 @@ PrefabInstance:
       value: RandomGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
+      propertyPath: _startSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123419276651485195, guid: 3fcbe219fca922e4caedb5e8e616fdae, type: 3}
       propertyPath: _roadChanges.Array.size
       value: 14
       objectReference: {fileID: 0}
@@ -1330,6 +1334,10 @@ PrefabInstance:
     - target: {fileID: 115277896690552381, guid: 485e961c85ecaa546844373d64eb7cea, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509637986161434917, guid: 485e961c85ecaa546844373d64eb7cea, type: 3}
+      propertyPath: _roadHeight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4509637986161434917, guid: 485e961c85ecaa546844373d64eb7cea, type: 3}
       propertyPath: _lastSpawnedRoadTransform
