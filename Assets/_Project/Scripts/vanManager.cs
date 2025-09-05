@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class VanManager : MonoBehaviour
@@ -36,8 +37,10 @@ public class VanManager : MonoBehaviour
     private bool turning = false;
     private float turnCD = 0f;
 
+    [Header("Combo")]
     [HideInInspector] public static float jauge = 1f;
     private float jaugeReset = 0f;
+    [SerializeField] UnityEvent onJaugeChange;
 
     [Header("Score")]
     [SerializeField] private int _addScorePerSecond = -1;
@@ -66,11 +69,13 @@ public class VanManager : MonoBehaviour
         {
             jauge = 0f;
             jaugeReset = 0f;
+            onJaugeChange?.Invoke();
         }
 
         if (jauge > 3)
         {
             jauge = 3;
+            onJaugeChange?.Invoke();
         }
 
         // Check if add score per second
@@ -119,6 +124,7 @@ public class VanManager : MonoBehaviour
 
                 jauge++;
                 jaugeReset = 0f;
+                onJaugeChange?.Invoke();
 
                 SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
 
@@ -128,6 +134,7 @@ public class VanManager : MonoBehaviour
             case "Wall":
                 Debug.Log($"Player collided with a wall - {collision.gameObject.name}");
                 jauge++;
+                onJaugeChange?.Invoke();
                 points += _addScoreOnWallCollision * jauge;
                 PointsBigPopUpAnimation();
 
@@ -160,6 +167,7 @@ public class VanManager : MonoBehaviour
                 PointsBigPopUpAnimation();
 
                 jauge++;
+                onJaugeChange?.Invoke();
                 jaugeReset = 0f;
                 
                 SoundManager.instance.PlayRandomSoundFXClip(Bonus, transform);
