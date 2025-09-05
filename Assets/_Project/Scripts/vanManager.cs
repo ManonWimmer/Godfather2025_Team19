@@ -67,7 +67,7 @@ public class VanManager : MonoBehaviour
 
         if (jaugeReset >= 2f)
         {
-            jauge = 0f;
+            jauge = 1f;
             jaugeReset = 0f;
             onJaugeChange?.Invoke();
         }
@@ -107,7 +107,7 @@ public class VanManager : MonoBehaviour
             {
                 _camera.transform.Rotate(Vector3.forward, 100.0f * Time.deltaTime);
 
-                if (_camera.transform.rotation.eulerAngles.z >= 360.0f || _camera.transform.rotation.eulerAngles.z < 91.0f)
+                if ( (_camera.transform.rotation.eulerAngles.z < 0.5f || _camera.transform.rotation.eulerAngles.z > 450))
                 {
                     _camera.transform.rotation = Quaternion.Euler(0, 0, 90);
                 }
